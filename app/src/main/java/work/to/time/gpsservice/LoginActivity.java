@@ -32,6 +32,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -48,6 +49,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -85,7 +88,7 @@ public class LoginActivity extends FragmentActivity{
         MyLog.show("LoginActivity");
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        firebaseTest();
         String uri = "@drawable/ic_notifications";
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable res = getResources().getDrawable(imageResource);
@@ -411,6 +414,13 @@ public class LoginActivity extends FragmentActivity{
             }
         }
         return true;
+    }
+
+    void firebaseTest(){
+        FirebaseMessaging.getInstance().subscribeToTopic("Test");
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d("MyLog", "Token is: " + token);
+
     }
 }
 
