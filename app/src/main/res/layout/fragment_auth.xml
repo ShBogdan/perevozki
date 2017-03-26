@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
@@ -49,10 +48,11 @@ android:background="#ffffff">
         android:textColorHint="#cccccc"
         android:drawableLeft="@drawable/ic_account_box"
         tools:text="Login"
-        android:text="admin"
         style="@style/FormTextStyle"
 
         />
+
+    <!--android:text="admin"-->
     <!--</android.support.design.widget.TextInputLayout>-->
 
     <!--<android.support.design.widget.TextInputLayout-->
@@ -71,11 +71,11 @@ android:background="#ffffff">
         android:drawableLeft="@drawable/ic_https"
         android:imeActionId="@+id/login"
         tools:text="password"
-        android:text="123456"
-
         style="@style/FormTextStyle"
 
         />
+    <!--android:text="123456"-->
+
     <!--</android.support.design.widget.TextInputLayout>-->
 
     <Button

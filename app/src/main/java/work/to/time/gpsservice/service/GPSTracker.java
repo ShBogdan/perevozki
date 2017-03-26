@@ -10,6 +10,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.location.Location;
 
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationListener;
 import android.location.LocationManager;
@@ -77,6 +78,7 @@ public class GPSTracker extends Service implements NetSubscriber,
                 Toast.makeText(getBaseContext(), String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()), Toast.LENGTH_SHORT).show();
                 MyLog.show("Send to server: " + String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()));
             }
+            MyLog.show("current position: " + String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()));
 
             //Сохраненные данные. После отсылки удаляются в onNetSuccess
             SharedPreferences sp = getBaseContext().getSharedPreferences("position", Context.MODE_PRIVATE);
@@ -273,19 +275,21 @@ public class GPSTracker extends Service implements NetSubscriber,
     }
 
     private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil
-                .isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, null,
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(this);
+        if(result != ConnectionResult.SUCCESS) {
+            if(googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(null, result,
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
                 Toast.makeText(getApplicationContext(),
                         "This device is not supported.", Toast.LENGTH_LONG)
                         .show();
             }
+
             return false;
         }
+
         return true;
     }
 

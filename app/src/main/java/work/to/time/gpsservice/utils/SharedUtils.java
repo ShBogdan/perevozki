@@ -9,6 +9,7 @@ public final class SharedUtils {
     private static final String NAME = "perevozki";
     private static final String USER_LOGGED_IN = "userLoggedIn";
     private static final String ACCESS_TOKEN = "accessToken";
+    private static final String DEVICE_ID = "deviceId";
     private static final String UID = "uid";
 
 
@@ -53,8 +54,14 @@ public final class SharedUtils {
     public static String getAccessToken(@NonNull Context context) {
         return getSharedPreferences(context).getString(ACCESS_TOKEN, null);
     }
+    @Nullable
+    public static String getAccessDeviceId(@NonNull Context context) {
+        return getSharedPreferences(context).getString(DEVICE_ID, null);
+    }
 
-
+    public static void setAccessDeviceId(@NonNull Context context, String value) {
+        save(context, DEVICE_ID, value);
+    }
 
     public static void setUid(@NonNull Context context, int value) {
         save(context, UID, value);

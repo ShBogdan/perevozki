@@ -1,14 +1,17 @@
 package work.to.time.gpsservice.net.response;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CoordResponse extends BaseResponse {
     public List<MyData> data;
+    public List<String> errors;
 
-    public class MyData{
+    public CoordResponse(List<MyData> data, List<String> errors) {
+        this.data = data;
+        this.errors = errors;
+    }
+
+    public class MyData {
         private String longitude;
         private String latitude;
         private String created_at;
@@ -36,9 +39,12 @@ public class CoordResponse extends BaseResponse {
             return user_id;
         }
 
-
         public int getId() {
             return id;
+        }
+
+        public List<String> getErrorMassage() {
+            return errors;
         }
     }
 }

@@ -3,147 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\7d108d5bd496c170ff852826ad59ba5a249d9a61\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-10.0.1_96f031f855c36df0cb724ca9c1b0b63fd0a71991\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.1_44a37f4d72dbe8ec4a3116837893c9c471f4870a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0cf0dfb4d7713d4b5ee02b2ba7a0aa62534100ce">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e8fb1a14161fe22076e2e70b4d5df1b2c69d5926\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.1_c524ea2d985e91ee6f29b7b372e71ec93453072a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\transition\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.1.1_51ffc17b51352d3122417b1b7e5d66b3726d67f1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-multidex-1.0.1_3c2e965ab760d1f7a9d6c54e6f9e0b159f1bc1a8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.1_91cc15656ff214f77e242636776cda90a8e945d3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\logging-interceptor\3.3.1\99ce730034c6f5aaed710d1e0e9df95e8714ed5f\logging-interceptor-3.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="99ce730034c6f5aaed710d1e0e9df95e8714ed5f">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\logging-interceptor-3.3.1_4418b26669c26ce96b3f0728143c8f4cff6ed748\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.1.1_296ef4e79aa9485e0f59049b0ced2305ef39e3e7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_60e128f9dead54e4f30119c9c535ad7076e61a43\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\design\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.1.1_8c487b03238457acab4aa237685c2817a936e903\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_bc680e263f0c9bfec950d85941c668015dfd6e33\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.1_71a4b31ed5fa45b4231c8bf423119c3c57842ac3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_ca0db1787014a218073f35a7cd17a3fdbb5e9b8a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.1_59d02b1396f618e337b8773b9f38986d821f487a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Bogdan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.1_699385427e2708267fc2324de907347259460f17\classes.dex" />
+        sha1="a61e7010aa7be5da53cd1bc5279630510c9a4912">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a25aee2525274fd4b8ad9393b8a6c5dbe8f86ffa\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -152,34 +17,70 @@
         optimize="true"
         revision="25.0.2"
         sha1="7c0d7c8f6e52115bb82fa018d81a8d0cae35dde5">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-scalars-2.1.0_6815ffc5d938d2050accb55727526f8a495d4ebd\classes.dex" />
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-scalars-2.1.0_6815ffc5d938d2050accb55727526f8a495d4ebd\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\5d8d1d8476f5ab5b5b928be76cf6c238762bea24\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d991fd81b776ffcd4a03fe1706fce9aa3af0470b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\aeb972ca51a6331968ac82f54bf937089c6fffd6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ce9112e08a027c8620ae693983e38cdbb9f6371b">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f5e3c7957ca6e1b48e5e0c335ee91c9b81b38e5c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\7050e81ae05b194b902ee925c64723e6dcb99949\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.1_2eae2d5d949cdd15ee21652c5f86cfd46f61b1cb\classes.dex" />
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5888d348401133f5d316b8d5a1aad6cc23380537\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\10.0.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\fa0444a198ee46d9e77209cf71eec54f068ebf78\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-location-10.0.1_801ab746a948dca26949077aea193155c16ed736\classes.dex" />
+        sha1="3d6951cb416ebf8c66a32b9480808ca247b68344">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_df7de631b9b4c9279df1019ae425dba0328aca2d\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\a5725fd856c65f5fec083dff9fe06f542cab4945\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-10.0.1_da9997abf746c96a2a63365c35f4c4eea12b6452\classes.dex" />
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_db472a77bbae5d104c69ba4fce48c1f467a9d0d0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\27205beab467f7eb2de7db3544c52a5717c04a7c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_43fd6760c90c6ece8366d6fe84b8ec12dc7ae010\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\44bde1eaadfb26e5ea602dcb4e7a268839a93558\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a94a1765e6713df83ba9941267a4c161179451d5\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -188,34 +89,124 @@
         optimize="true"
         revision="25.0.2"
         sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-7.0.1_f9339a8579fcfaac468478e9c18e7d42517c4d09\classes.dex" />
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-7.0.1_f9339a8579fcfaac468478e9c18e7d42517c4d09\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\d28a650a708428018aa32f1fecf6ae6dd032e615\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-10.0.1_40e401e20af1eaa11850b6a7fb5872eb2adff2c2\classes.dex" />
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dc040578be9551f903a9bc0196a89f746beec227\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\logging-interceptor\3.3.1\99ce730034c6f5aaed710d1e0e9df95e8714ed5f\logging-interceptor-3.3.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="6d66b4830792e3cdbec0e4de61a2b48c04d84959">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_c225275cd1d80ee0b3f822654e6b5e14aa128588\classes.dex" />
+        sha1="99ce730034c6f5aaed710d1e0e9df95e8714ed5f">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\logging-interceptor-3.3.1_4418b26669c26ce96b3f0728143c8f4cff6ed748\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\240649ba66d0bc507d57db3f750e96ef7c7c9804\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.1_1cce671c3bea05003ba9a581affdd874afde9dec\classes.dex" />
+        sha1="1ac56e5801e986583cbe27f2cce57f626cc7ff93">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_233e621bf35b152ae0068e7b8380370b68c8bf3c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_60e128f9dead54e4f30119c9c535ad7076e61a43\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\c02c1085cc0e3d0e96ade54d1605e05315f54e72\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6a7e1c79c91bca88307f9fbcc722d1d1441aeecf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\6d1e07af70a7e1f9ec133c4d8b1fdaee2f3ab7d4\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3d13e510077b35fe8e49930a627dd849ad5da0dc">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b5b8388bf3d1c5c16a8f4bd3fa8f6351c9187f58\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\9167b3b4558991df65c9a2e24f4c1f185796ab15\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c1caf4bda5f76efafc33da184fca835abccbb9bc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\junit\junit\4.12\2973d150c0dc1fefe998f834810d68f278ea58ec\junit-4.12.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2973d150c0dc1fefe998f834810d68f278ea58ec">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\junit-4.12_e558590a55f9c4d0bb0a2101cc89fc185a1827db\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\8ae457f44654b6e11dbca34f9de01c92f4e9cd90\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d5cbbbfe040201c7569478b70a13b58fd11aab4">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5f56e5b0b98ec051de3662455e6b6e1858303cf0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.3\42a25dc3219429f0e5d060061f71acb49bf010a0\hamcrest-core-1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="42a25dc3219429f0e5d060061f71acb49bf010a0">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\hamcrest-core-1.3_3601a80b49e625bbdb6c18278709e2543a45818a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\50854fa0f9acc9fee863083e8c659d4d952991ef\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bd75f9f0296fe220da6d0ad961831b04541c4452">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e93131793be2482de6a730723cd7dc1d56fee318\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_6b33bcf1dcc4fe1099fc8a19299fa2426be0997b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\1c2a2594cf2c2f37c4955db8281b7d73c5ee51e9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_36722cd4300fce02c83b136cbaf9fd0ca9a64950\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -224,7 +215,16 @@
         optimize="true"
         revision="25.0.2"
         sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.1_cd0c19b185b9431764290a94bacccab56ab28964\classes.dex" />
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.1_cd0c19b185b9431764290a94bacccab56ab28964\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\094215f1711add638662323721ae22705ed77aa1\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dc53d66b9adb93a6842dfb0d6df015c99805a2df\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -233,25 +233,97 @@
         optimize="true"
         revision="25.0.2"
         sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_19137b3d7dfc11ae49539d7be204993aaab48267\classes.dex" />
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_19137b3d7dfc11ae49539d7be204993aaab48267\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\e423c9b715d0c4ed1403a088ce8de1ef206f8713\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.1_c51767648ddc41f4b4cc203a8b33cd964bad3792\classes.dex" />
+        sha1="a8ae156c2726ac9c56daaf4b49452ec2cdb7bba9">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_95f2940be0294a004dc6ecdf97c2d79c2f705f98\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.1\jars\classes.jar"
+        jar="C:\Users\Bogdan\.android\build-cache\d433e4adec0a5aef5899f859ccda46e24f3b4a59\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
-        <dex dex="C:\Users\Bogdan\StudioProjects\perevozkiapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.1_85000122024bb527092c9a6221f3cec3d78c484e\classes.dex" />
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_899ca5501afdf033e17385b07f24ed225a3b67fb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_bc680e263f0c9bfec950d85941c668015dfd6e33\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\39709d032bab83f805a82ca54ec723ef9ac250db\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5822c1fe37586378f62339d783854840c5f93b71\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\c78d5fb23f62c37234cb12a16c636c2367e54ef1\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="75575883f0348fc5d2be85f23bd10b050095cf17">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_acab9e99b2c19a6e4b57506117d58292c7da9cb2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\864bab2179d50c61e72dd557b663d770c80ed93f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_edcaedccfc2f99271b11331197d529a1186d5d50\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a16b09ab5e95fffab6e1b226b6d5611f02a7362e">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_4009f20b8b00851540ef22adc690a8e6b5814804\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_ca0db1787014a218073f35a7cd17a3fdbb5e9b8a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.1_699385427e2708267fc2324de907347259460f17\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Bogdan\.android\build-cache\ac30e12c50e8f8cc2796a3413a3c7e58b2b676a7\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d08bb32b88df3dbcbe1d498c3c57f020b8c521ec">
+        <dex dex="C:\Users\Bogdan\StudioProjects\perevozki\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1e59f8502dd6999e8be2a43baf6f1d23d18c14a3\classes.dex" />
     </item>
 
 </items>

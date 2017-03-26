@@ -31,6 +31,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import work.to.time.gpsservice.core.MyApplication;
@@ -48,8 +51,6 @@ public class AuthFragment extends Fragment implements NetSubscriber {
 
     MyApplication app;
     Context mContext;
-    FragmentActivity a;
-
 
     @Bind(R.id.login_progress)
     View mProgressView;
@@ -95,7 +96,6 @@ public class AuthFragment extends Fragment implements NetSubscriber {
             @Override
             public void onClick(View view) {
                 attemptLogin();
-
             }
         });
 
@@ -136,7 +136,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         }
         if (!cancel) {
             showProgress(true);
-            app.getNetManager().authorize(email, password);
+            app.getNetManager().authorize(email, password, getFirebaseToken());
         }
     }
 
@@ -190,7 +190,6 @@ public class AuthFragment extends Fragment implements NetSubscriber {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-
     private void showProgress(final boolean show) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -219,5 +218,14 @@ public class AuthFragment extends Fragment implements NetSubscriber {
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }
+
+    private String getFirebaseToken(){
+        FirebaseMessaging.getInstance().subscribeToTopic("Test");
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d("MyLog", "Device id: " + token);
+        SharedUtils.setAccessDeviceId(mContext, token);
+
+        return token;
     }
 }

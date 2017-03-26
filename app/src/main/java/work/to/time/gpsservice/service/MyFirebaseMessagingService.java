@@ -16,10 +16,15 @@ import work.to.time.gpsservice.LoginActivity;
 import work.to.time.gpsservice.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    private static final String TAG = "MyLog";
+
+    {
+        Log.d(TAG, "MyFirebaseMessagingService");
+    }
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d("MyLog", "From: " + remoteMessage.getFrom());
-        sendNotification(remoteMessage.getFrom());
+        sendNotification(remoteMessage.getNotification().getBody());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
@@ -40,8 +45,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
-                .setContentTitle("FCM Message")
+                .setSmallIcon(R.drawable.ic_wheel)
+                .setContentTitle("Perevozki Message")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

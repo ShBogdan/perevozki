@@ -1,17 +1,10 @@
 package work.to.time.gpsservice;
 
-import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -32,7 +25,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -49,8 +41,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -68,19 +58,17 @@ public class LoginActivity extends FragmentActivity{
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    boolean isClose = true;
     boolean doNotChangeSwitch = true;
-
+    BroadcastReceiver receiver = null;
 
     @Bind(R.id.text_is_watching)
     TextView tvIsWatching;
     @Bind(R.id.switchGPS)
     Switch mSwitchGPS;
-    @Bind(R.id.ic_notifications_1)
-    ImageView ivNotify_1;
-    @Bind(R.id.ic_notifications_2)
-    ImageView ivNotify_2;
-
+//    @Bind(R.id.ic_notifications_1)
+//    ImageView ivNotify_1;
+//    @Bind(R.id.ic_notifications_2)
+//    ImageView ivNotify_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,17 +76,16 @@ public class LoginActivity extends FragmentActivity{
         MyLog.show("LoginActivity");
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        firebaseTest();
-        String uri = "@drawable/ic_notifications";
-        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
-        Drawable res = getResources().getDrawable(imageResource);
-        ivNotify_1.setImageDrawable(res);
 
-        String uri1 = "@drawable/ic_notifications";
-        int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
-        Drawable res1 = getResources().getDrawable(imageResource1);
-        ivNotify_2.setImageDrawable(res1);
-
+//        String uri = "@drawable/ic_notifications";
+//        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+//        Drawable res = getResources().getDrawable(imageResource);
+//        ivNotify_1.setImageDrawable(res);
+//
+//        String uri1 = "@drawable/ic_notifications";
+//        int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
+//        Drawable res1 = getResources().getDrawable(imageResource1);
+//        ivNotify_2.setImageDrawable(res1);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -135,7 +122,7 @@ public class LoginActivity extends FragmentActivity{
     protected void onPause() {
         MyLog.show("onPause");
         super.onPause();
-//        broadcastReceiver(false);
+        broadcastReceiver(false);
     }
 
     @Override
@@ -378,7 +365,7 @@ public class LoginActivity extends FragmentActivity{
     }
 
    private void broadcastReceiver(boolean register){
-        BroadcastReceiver receiver = null;
+
         if(register){
             receiver = new BroadcastReceiver() {
                 @Override
@@ -416,11 +403,5 @@ public class LoginActivity extends FragmentActivity{
         return true;
     }
 
-    void firebaseTest(){
-        FirebaseMessaging.getInstance().subscribeToTopic("Test");
-        String token = FirebaseInstanceId.getInstance().getToken();
-        Log.d("MyLog", "Token is: " + token);
-
-    }
 }
 

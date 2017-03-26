@@ -15,10 +15,9 @@ public class SmsListener extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context.getApplicationContext(),"SMS", Toast.LENGTH_LONG).show();
         MyLog.show("SMS");
         if (intent.getAction().equals(SMS_RECEIVED) || intent.getAction().equals(BOOT_COMPLETED)) {
-            Toast.makeText(context.getApplicationContext(),"SMS ПОЛУЧИЛ", Toast.LENGTH_LONG).show();
+            Toast.makeText(context.getApplicationContext(),"Perevozki SMS получено", Toast.LENGTH_LONG).show();
             MyLog.show("SMS ПОЛУЧИЛ");
         }
     }
