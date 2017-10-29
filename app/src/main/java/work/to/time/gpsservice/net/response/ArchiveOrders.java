@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArchiveOrders {
+
     public List<Order> data;
 
     public ArchiveOrders(List<Order> data) {
@@ -68,4 +69,5 @@ public class ArchiveOrders {
         }
 
     }
+
 }

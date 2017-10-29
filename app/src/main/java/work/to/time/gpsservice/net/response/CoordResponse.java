@@ -3,6 +3,7 @@ package work.to.time.gpsservice.net.response;
 import java.util.List;
 
 public class CoordResponse extends BaseResponse {
+
     public List<MyData> data;
     public List<String> errors;
 
@@ -47,5 +48,7 @@ public class CoordResponse extends BaseResponse {
             return errors;
         }
     }
+
 }
+
 

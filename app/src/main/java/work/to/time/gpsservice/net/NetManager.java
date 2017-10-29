@@ -22,7 +22,8 @@ import work.to.time.gpsservice.utils.MyLog;
 
 
 public class NetManager implements Net {
-    Retrofit retrofit;
+
+    private Retrofit retrofit;
     private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
     private Api api;
     private final List<NetSubscriber> subscribers = new ArrayList<>();
@@ -54,8 +55,6 @@ public class NetManager implements Net {
                 t.printStackTrace();
             }
         });
-
-
     }
 
     @Override
@@ -156,4 +155,5 @@ public class NetManager implements Net {
             }
         });
     }
+
 }

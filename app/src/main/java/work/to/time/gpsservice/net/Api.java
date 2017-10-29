@@ -12,6 +12,7 @@ import work.to.time.gpsservice.net.response.AuthModel;
 import work.to.time.gpsservice.net.response.CoordResponse;
 
 public interface Api {
+
     @FormUrlEncoded
     @POST("/api/auth")
     Call<AuthModel> authorize(@Field("login") String username,
@@ -29,6 +30,7 @@ public interface Api {
     @POST("/api/orders/active")
     Call<ResponseBody> activeOrders(@Field("deviceId") String deviceId,
                                     @Header("auth") String header);
+
     @FormUrlEncoded
     @POST("/api/orders/archive")
     Call<ArchiveOrders> archiveOrders(@Field("deviceId") String deviceId,
@@ -37,8 +39,7 @@ public interface Api {
     @FormUrlEncoded
     @POST("/api/orders/suitable")
     Call<ResponseBody> suitableOrders(@Field("deviceId") String deviceId,
-                                     @Header("auth") String header);
-
+                                      @Header("auth") String header);
 
     @FormUrlEncoded
     @POST("/api/track")
@@ -46,5 +47,5 @@ public interface Api {
                                  @Field("latitude") String latitude,
                                  @Field("timestamp") String timestamp,
                                  @Header("auth") String header);
-}
 
+}

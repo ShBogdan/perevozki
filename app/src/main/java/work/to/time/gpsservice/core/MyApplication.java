@@ -2,12 +2,15 @@ package work.to.time.gpsservice.core;
 
 import android.app.Application;
 import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import work.to.time.gpsservice.net.NetManager;
 import work.to.time.gpsservice.utils.MyLog;
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
+
     NetManager netManager;
+
     private boolean activityVisible;
 
     public boolean isActivityVisible() {
@@ -37,4 +40,5 @@ public class MyApplication extends Application {
     public void setNetManager(NetManager netManager) {
         this.netManager = netManager;
     }
+
 }
