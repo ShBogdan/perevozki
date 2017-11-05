@@ -72,7 +72,6 @@ public final class SharedUtils {
         return getSharedPreferences(context).getString(UID, null);
     }
 
-
     public static void clear(Context context) {
         getSharedPreferences(context).edit().clear().commit();
     }
@@ -80,4 +79,5 @@ public final class SharedUtils {
     public static void removeRecord(Context context) {
         getSharedPreferences(context).edit().remove(ACCESS_TOKEN).commit();
     }
+
 }

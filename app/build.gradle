@@ -15,11 +15,11 @@ android {
 
     buildTypes {
         release {
-            buildConfigField 'String', 'BASE_URL', "\"http://perevozky.react-logic.com\""
+            buildConfigField 'String', 'BASE_URL', "\"https://112kilo.com\""
 
         }
         debug {
-            buildConfigField 'String', 'BASE_URL', "\"http://perevozky.react-logic.com\""
+            buildConfigField 'String', 'BASE_URL', "\"https://112kilo.com\""
 
         }
     }

@@ -3,33 +3,30 @@ package work.to.time.gpsservice;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.BroadcastReceiver;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-
 import android.text.TextUtils;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -45,16 +42,14 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.util.List;
 
 import butterknife.Bind;
-
 import butterknife.ButterKnife;
-
 import work.to.time.gpsservice.service.GPSTracker;
 import work.to.time.gpsservice.utils.Constants;
 import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.PermissionsUtils;
 import work.to.time.gpsservice.utils.SharedUtils;
 
-public class LoginActivity extends FragmentActivity{
+public class LoginActivity extends FragmentActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
@@ -90,11 +85,11 @@ public class LoginActivity extends FragmentActivity{
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        if(SharedUtils.getAccessToken(getApplicationContext()) == null){
+        if (SharedUtils.getAccessToken(getApplicationContext()) == null) {
             AuthFragment authFragment = new AuthFragment();
             fragmentTransaction.add(R.id.fragment, authFragment);
             fragmentTransaction.commit();
-        }else{
+        } else {
             MenuFragment menuFragment = new MenuFragment();
             fragmentTransaction.add(R.id.fragment, menuFragment);
             fragmentTransaction.commit();
@@ -136,7 +131,7 @@ public class LoginActivity extends FragmentActivity{
     public void statusCheck() {
         doNotChangeSwitch = false;
 
-        if (isLocationByNet()){
+        if (isLocationByNet()) {
             tvIsWatching.setText("Сервис для отслеживания: Сеть оператора");
             tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
         }
@@ -146,18 +141,16 @@ public class LoginActivity extends FragmentActivity{
         }
 
 
-        if(!isLocationByNet() && !isGPSActive()){
+        if (!isLocationByNet() && !isGPSActive()) {
             tvIsWatching.setText("Нет доступных источников слежения");
             tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
         }
 
 
-
         if (isMyServiceRunning(GPSTracker.class)) {
             mSwitchGPS.setChecked(true);
             mSwitchGPS.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
-        }
-        else{
+        } else {
             mSwitchGPS.setChecked(false);
             mSwitchGPS.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
         }
@@ -252,13 +245,13 @@ public class LoginActivity extends FragmentActivity{
         return false;
     }
 
-    private boolean isGPSActive(){
+    private boolean isGPSActive() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     //Отслеживание через сеть
-    private boolean isLocationByNet(){
+    private boolean isLocationByNet() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
@@ -267,7 +260,7 @@ public class LoginActivity extends FragmentActivity{
         int locationMode = 0;
         String locationProviders;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
                 locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
 
@@ -278,51 +271,51 @@ public class LoginActivity extends FragmentActivity{
 
             return locationMode != Settings.Secure.LOCATION_MODE_OFF;
 
-        }else{
+        } else {
             locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
             return !TextUtils.isEmpty(locationProviders);
         }
     }
 
-    private void stopService(){
+    private void stopService() {
         //если просто остановить сервис(stopService()) то не будет возможности закрыть выполняющиеся потоки
         Intent i = new Intent(getApplicationContext(), GPSTracker.class);
         i.setAction(Constants.ACTION.STOPFOREGROUND_ACTION);
         startService(i);
     }
 
-    private void startService(){
+    private void startService() {
         Intent foregroundService = new Intent(getBaseContext(), GPSTracker.class);
         foregroundService.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
         startService(foregroundService);
     }
 
-    private void switchListener(){
+    private void switchListener() {
         mSwitchGPS.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(SharedUtils.getAccessToken(getApplicationContext()) == null){
+                if (SharedUtils.getAccessToken(getApplicationContext()) == null) {
                     Toast.makeText(getApplication(), "Вы не авторизированы", Toast.LENGTH_LONG).show();
                     mSwitchGPS.setChecked(false);
                     mSwitchGPS.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
                     return;
                 }
                 if (doNotChangeSwitch) {
-                    if(isChecked){
-                        if(isLocationEnabled(getApplication())){
+                    if (isChecked) {
+                        if (isLocationEnabled(getApplication())) {
                             startService();
                         } else {
                             buildAlertMessageNoGps();
                         }
-                        if (isMyServiceRunning(GPSTracker.class)){
+                        if (isMyServiceRunning(GPSTracker.class)) {
                             mSwitchGPS.setChecked(true);
                             mSwitchGPS.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
-                        }else{
+                        } else {
                             mSwitchGPS.setChecked(false);
                             mSwitchGPS.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
                         }
                     }
-                    if(!isChecked){
-                        if(isMyServiceRunning(GPSTracker.class)){
+                    if (!isChecked) {
+                        if (isMyServiceRunning(GPSTracker.class)) {
                             stopService();
                             mSwitchGPS.setChecked(false);
                             mSwitchGPS.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
@@ -356,7 +349,7 @@ public class LoginActivity extends FragmentActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SharedUtils.removeRecord(getApplicationContext());
-                        if(isMyServiceRunning(GPSTracker.class)){
+                        if (isMyServiceRunning(GPSTracker.class)) {
                             stopService();
                         }
                         finish();
@@ -364,9 +357,9 @@ public class LoginActivity extends FragmentActivity{
                 }).show();
     }
 
-   private void broadcastReceiver(boolean register){
+    private void broadcastReceiver(boolean register) {
 
-        if(register){
+        if (register) {
             receiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -378,10 +371,11 @@ public class LoginActivity extends FragmentActivity{
             filter.addAction("SERVICE_DISABLED");
             registerReceiver(receiver, filter);
         }
-        if(!register){
-            if(null != receiver){
+        if (!register) {
+            if (null != receiver) {
                 ///Должно быть в OnPause
-                unregisterReceiver(receiver);}
+                unregisterReceiver(receiver);
+            }
         }
     }
 
@@ -392,6 +386,7 @@ public class LoginActivity extends FragmentActivity{
             }
         }
     }
+
     public static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {

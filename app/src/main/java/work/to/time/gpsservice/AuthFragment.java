@@ -4,18 +4,13 @@ package work.to.time.gpsservice;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,13 +34,12 @@ import work.to.time.gpsservice.core.MyApplication;
 import work.to.time.gpsservice.net.NetManager;
 import work.to.time.gpsservice.net.response.AuthModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
-import work.to.time.gpsservice.service.GPSTracker;
-import work.to.time.gpsservice.utils.Constants;
 import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.PermissionsUtils;
 import work.to.time.gpsservice.utils.SharedUtils;
 
 public class AuthFragment extends Fragment implements NetSubscriber {
+
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     MyApplication app;
@@ -63,11 +56,9 @@ public class AuthFragment extends Fragment implements NetSubscriber {
     @Bind(R.id.sign_in_button)
     Button mSignInButton;
     @Bind(R.id.tvRegistration)
-    TextView mRegistrationButto;
+    TextView mRegistrationButton;
     @Bind(R.id.imageView)
     ImageView mLogo;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +72,10 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                MyLog.show("onEditorAction");
 
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    authorization();
                     return true;
                 }
                 return false;
@@ -95,11 +87,11 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                authorization();
             }
         });
 
-        mRegistrationButto.setOnClickListener(new View.OnClickListener() {
+        mRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://112kilo.react-logic.com/#/registration"));
@@ -118,7 +110,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         return view;
     }
 
-    private void attemptLogin() {
+    private void authorization() {
         mEmailView.setError(null);
         mPasswordView.setError(null);
         String email = mEmailView.getText().toString();
@@ -149,6 +141,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
 
     @Override
     public void onNetSuccess(int requestId, Object data) {
+        MyLog.show("onNetSuccess");
         if (requestId == NetManager.REQUEST_AUTH) {
             showProgress(false);
             AuthModel model = (AuthModel) data;
@@ -228,4 +221,5 @@ public class AuthFragment extends Fragment implements NetSubscriber {
 
         return token;
     }
+
 }
