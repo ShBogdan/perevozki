@@ -20,6 +20,10 @@ public interface Api {
                               @Field("deviceId") String deviceId);
 
     @FormUrlEncoded
+    @POST("/api/auth/verify-status")
+    Call<AuthModel> verify(@Header("auth") String header);
+
+    @FormUrlEncoded
     @POST("/api/track")
     Call<CoordResponse> sendCoord(@Field("longitude") String longitude,
                                   @Field("latitude") String latitude,
@@ -34,6 +38,16 @@ public interface Api {
     @FormUrlEncoded
     @POST("/api/orders/archive")
     Call<ArchiveOrders> archiveOrders(@Field("deviceId") String deviceId,
+                                      @Header("auth") String header);
+
+    @FormUrlEncoded
+    @POST("/api/routes/active")
+    Call<ResponseBody> activeRoutes(@Field("deviceId") String deviceId,
+                                    @Header("auth") String header);
+
+    @FormUrlEncoded
+    @POST("/api/routes/archive")
+    Call<ArchiveOrders> archiveRoutes(@Field("deviceId") String deviceId,
                                       @Header("auth") String header);
 
     @FormUrlEncoded

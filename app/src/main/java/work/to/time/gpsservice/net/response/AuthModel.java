@@ -45,4 +45,39 @@ public class AuthModel extends BaseResponse {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AuthModel authModel = (AuthModel) o;
+
+        if (token != null ? !token.equals(authModel.token) : authModel.token != null) return false;
+        if (error != null ? !error.equals(authModel.error) : authModel.error != null) return false;
+        if (verified != null ? !verified.equals(authModel.verified) : authModel.verified != null)
+            return false;
+        return userId != null ? userId.equals(authModel.userId) : authModel.userId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = token != null ? token.hashCode() : 0;
+        result = 31 * result + (error != null ? error.hashCode() : 0);
+        result = 31 * result + (verified != null ? verified.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthModel{" +
+                "token='" + token + '\'' +
+                ", error='" + error + '\'' +
+                ", verified=" + verified +
+                ", userId=" + userId +
+                '}';
+    }
+
 }

@@ -38,6 +38,8 @@ import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.PermissionsUtils;
 import work.to.time.gpsservice.utils.SharedUtils;
 
+import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+
 public class AuthFragment extends Fragment implements NetSubscriber {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -94,7 +96,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         mRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://112kilo.react-logic.com/#/registration"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.REGISTRATION_URL));
                 startActivity(browserIntent);
             }
         });
@@ -145,9 +147,10 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         if (requestId == NetManager.REQUEST_AUTH) {
             showProgress(false);
             AuthModel model = (AuthModel) data;
-            if (!model.getToken().equals("false")) {
+            if (allNotNull(model)
+                    && !model.getToken().equals("false")) {
                 SharedUtils.setAccessToken(mContext, model.getToken());
-                if(getActivity()!=null) {
+                if (getActivity() != null) {
                     Toast.makeText(mContext, "Авторизация прошла успешно", Toast.LENGTH_SHORT).show();
                     final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment, new MenuFragment(), "MenuFragment");
@@ -155,7 +158,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
                     ft.commit();
                 }
             } else {
-                Toast.makeText(mContext, "Incorrect login or password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Не верный пароль или логин", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -213,7 +216,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         }
     }
 
-    private String getFirebaseToken(){
+    private String getFirebaseToken() {
         FirebaseMessaging.getInstance().subscribeToTopic("Test");
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MyLog", "Device id: " + token);
