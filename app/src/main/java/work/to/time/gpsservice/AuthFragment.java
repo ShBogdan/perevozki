@@ -149,7 +149,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
                     && !model.getToken().equals("false")) {
                 SharedUtils.setAccessToken(mContext, model.getToken());
                 SharedUtils.setUid(mContext, model.getUserId());
-                SharedUtils.setVerifide(mContext, model.getVerified());
+                SharedUtils.setVerify(mContext, model.getVerified().toString());
                 if (getActivity() != null) {
                     Toast.makeText(mContext, "Авторизация прошла успешно", Toast.LENGTH_SHORT).show();
                     final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();

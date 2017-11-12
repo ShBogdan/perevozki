@@ -6,12 +6,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.location.Location;
 
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -19,9 +17,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,15 +29,13 @@ import com.google.android.gms.location.LocationServices;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
 
 import work.to.time.gpsservice.LoginActivity;
 import work.to.time.gpsservice.R;
 import work.to.time.gpsservice.net.NetManager;
-import work.to.time.gpsservice.net.response.CoordResponse;
+import work.to.time.gpsservice.net.response.CoordModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
 import work.to.time.gpsservice.utils.Constants;
 import work.to.time.gpsservice.utils.MyLog;
@@ -185,7 +179,7 @@ public class GPSTracker extends Service implements NetSubscriber,
     public void onNetSuccess(int requestId, Object data) {
         if (requestId == NetManager.REQUEST_SEND_COORD) {
             MyLog.show("onNetSuccess");
-            CoordResponse.MyData response = (CoordResponse.MyData) data;
+            CoordModel response = (CoordModel) data;
             SharedUtils.setUid(getApplicationContext(), response.getId());
 
             //удаляем переданные из SP

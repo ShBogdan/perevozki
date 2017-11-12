@@ -9,7 +9,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import work.to.time.gpsservice.net.response.ArchiveOrders;
 import work.to.time.gpsservice.net.response.AuthModel;
-import work.to.time.gpsservice.net.response.CoordResponse;
+import work.to.time.gpsservice.net.response.CoordModel;
 
 public interface Api {
 
@@ -24,11 +24,11 @@ public interface Api {
     Call<AuthModel> verify(@Header("auth") String header);
 
     @FormUrlEncoded
-    @POST("/api/track")
-    Call<CoordResponse> sendCoord(@Field("longitude") String longitude,
-                                  @Field("latitude") String latitude,
-                                  @Field("timestamp") String timestamp,
-                                  @Header("auth") String header);
+    @POST("/api/track/create")
+    Call<CoordModel> sendCoord(@Field("longitude") String longitude,
+                               @Field("latitude") String latitude,
+                               @Field("timestamp") String timestamp,
+                               @Header("auth") String header);
 
     @FormUrlEncoded
     @POST("/api/orders/active")
@@ -41,6 +41,11 @@ public interface Api {
                                       @Header("auth") String header);
 
     @FormUrlEncoded
+    @POST("/api/orders/suitable")
+    Call<ResponseBody> suitableOrders(@Field("deviceId") String deviceId,
+                                      @Header("auth") String header);
+
+    @FormUrlEncoded
     @POST("/api/routes/active")
     Call<ResponseBody> activeRoutes(@Field("deviceId") String deviceId,
                                     @Header("auth") String header);
@@ -48,11 +53,6 @@ public interface Api {
     @FormUrlEncoded
     @POST("/api/routes/archive")
     Call<ArchiveOrders> archiveRoutes(@Field("deviceId") String deviceId,
-                                      @Header("auth") String header);
-
-    @FormUrlEncoded
-    @POST("/api/orders/suitable")
-    Call<ResponseBody> suitableOrders(@Field("deviceId") String deviceId,
                                       @Header("auth") String header);
 
     @FormUrlEncoded

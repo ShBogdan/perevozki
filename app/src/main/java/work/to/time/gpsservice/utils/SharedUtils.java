@@ -51,7 +51,7 @@ public final class SharedUtils {
         save(context, ACCESS_TOKEN, value);
     }
 
-    public static void setVerifide(@NonNull Context context, Boolean value) {
+    public static void setVerify(@NonNull Context context, String value) {
         save(context, VERIFY, value);
     }
 
@@ -59,9 +59,15 @@ public final class SharedUtils {
     public static String getAccessToken(@NonNull Context context) {
         return getSharedPreferences(context).getString(ACCESS_TOKEN, null);
     }
+
     @Nullable
     public static String getAccessDeviceId(@NonNull Context context) {
         return getSharedPreferences(context).getString(DEVICE_ID, null);
+    }
+
+    @Nullable
+    public static String getVerify(@NonNull Context context) {
+        return getSharedPreferences(context).getString(VERIFY, null);
     }
 
     public static void setAccessDeviceId(@NonNull Context context, String value) {

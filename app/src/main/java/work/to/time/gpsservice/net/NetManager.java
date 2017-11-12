@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import work.to.time.gpsservice.BuildConfig;
 import work.to.time.gpsservice.net.response.ArchiveOrders;
 import work.to.time.gpsservice.net.response.AuthModel;
-import work.to.time.gpsservice.net.response.CoordResponse;
+import work.to.time.gpsservice.net.response.CoordModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
 import work.to.time.gpsservice.utils.MyLog;
 
@@ -59,15 +59,16 @@ public class NetManager implements Net {
 
     @Override
     public void sendCoord(String longitude, String latitude, String timestamp, String token) {
-        api.sendCoord(longitude, latitude, timestamp, "Bearer " + token).enqueue(new Callback<CoordResponse>() {
+        api.sendCoord(longitude, latitude, timestamp, "Bearer " + token).enqueue(new Callback<CoordModel>() {
             @Override
-            public void onResponse(Call<CoordResponse> call, Response<CoordResponse> response) {
-                notifySuccess(REQUEST_SEND_COORD, response.body().data.get(0));
-                MyLog.show("Server return: " + "longitude:" + response.body().data.get(0).getLatitude() + " latitude " + response.body().data.get(0).getLongitude());
+            public void onResponse(Call<CoordModel> call, Response<CoordModel> response) {
+                MyLog.show("response.body()" + response.body().toString());
+                notifySuccess(REQUEST_SEND_COORD, response.body());
+                MyLog.show("Server return: " + "longitude:" + response.body().getLatitude() + " latitude " + response.body().getLongitude());
             }
 
             @Override
-            public void onFailure(Call<CoordResponse> call, Throwable t) {
+            public void onFailure(Call<CoordModel> call, Throwable t) {
                 notifyError(REQUEST_SEND_COORD, t.getLocalizedMessage());
                 t.printStackTrace();
             }
@@ -116,8 +117,19 @@ public class NetManager implements Net {
     }
 
     @Override
-    public void suitableOrders(String id, String token) {
+    public void suitableOrders(String deviceId, String token) {
+        api.suitableOrders(deviceId, "Bearer " + token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                notifySuccess(REQUEST_SUITABLE_ORDERS, response.body());
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                notifyError(REQUEST_SUITABLE_ORDERS, t.getLocalizedMessage());
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

@@ -31,6 +31,8 @@ import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.RecyclerViewAdapter;
 import work.to.time.gpsservice.utils.SharedUtils;
 
+import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+
 public class MenuFragment extends Fragment implements NetSubscriber, View.OnClickListener {
 
     MyApplication app;
@@ -57,6 +59,12 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     @Bind(R.id.massage)
     TextView massage;
 
+    @Bind(R.id.status)
+    TextView status;
+
+    @Bind(R.id.role)
+    TextView role;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
@@ -72,6 +80,13 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
         active.setOnClickListener(this);
         suitable.setOnClickListener(this);
         verify.setOnClickListener(this);
+        MyLog.show(SharedUtils.getVerify(getContext()));
+        if (allNotNull(SharedUtils.getVerify(getContext()))
+                && SharedUtils.getVerify(getContext()).equals("true")) {
+            ((ViewGroup) verify.getParent()).removeView(verify);
+            status.setText("Статус: Верифицирован");
+        }
+        role.setText("Роль: Водитель");
 
         return view;
     }
@@ -79,24 +94,24 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     @Override
     public void onNetSuccess(int requestId, Object data) {
         if (requestId == NetManager.REQUEST_ACTIVE_ORDERS) {
-//            MyLog.show((String) data);
-//            massage.setText((String) data);
-//            showProgress(false);
-
+            massage.setText((String) data);
+            showProgress(false);
         }
         if (requestId == NetManager.REQUEST_SUITABLE_ORDERS) {
+            massage.setText((String) data);
+            showProgress(false);
         }
         if (requestId == NetManager.REQUEST_ARCHIVE_ORDERS) {
-            ArchiveOrders orders = (ArchiveOrders) data;
-
-            List<ArchiveOrders.Order> orderList = orders.data;
-
-            adapter = new RecyclerViewAdapter(orderList);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            massage.setText((String) data);
+//            ArchiveOrders orders = (ArchiveOrders) data;
+//            List<ArchiveOrders.Order> orderList = orders.data;
+//
+//            adapter = new RecyclerViewAdapter(orderList);
+//            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+//            recyclerView.setLayoutManager(mLayoutManager);
+//            recyclerView.setItemAnimator(new DefaultItemAnimator());
+//            recyclerView.setAdapter(adapter);
+//            adapter.notifyDataSetChanged();
 
             showProgress(false);
         }
