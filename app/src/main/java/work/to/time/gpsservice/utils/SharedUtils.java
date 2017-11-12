@@ -11,6 +11,7 @@ public final class SharedUtils {
     private static final String ACCESS_TOKEN = "accessToken";
     private static final String DEVICE_ID = "deviceId";
     private static final String UID = "uid";
+    private static final String VERIFY = "verify";
 
 
     private static SharedPreferences getSharedPreferences(@NonNull Context context) {
@@ -48,6 +49,10 @@ public final class SharedUtils {
 
     public static void setAccessToken(@NonNull Context context, String value) {
         save(context, ACCESS_TOKEN, value);
+    }
+
+    public static void setVerifide(@NonNull Context context, Boolean value) {
+        save(context, VERIFY, value);
     }
 
     @Nullable

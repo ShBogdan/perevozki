@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,8 +51,8 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     @Bind(R.id.suitable)
     Button suitable;
 
-    @Bind(R.id.archive)
-    Button archive;
+    @Bind(R.id.verify)
+    Button verify;
 
     @Bind(R.id.massage)
     TextView massage;
@@ -69,7 +71,7 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
 
         active.setOnClickListener(this);
         suitable.setOnClickListener(this);
-        archive.setOnClickListener(this);
+        verify.setOnClickListener(this);
 
         return view;
     }
@@ -123,9 +125,9 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
                 showProgress(true);
                 app.getNetManager().suitableOrders(fireBase, token);
                 break;
-            case R.id.archive:
-                showProgress(true);
-                app.getNetManager().archiveOrders(fireBase, token);
+            case R.id.verify:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.REGISTRATION_URL));
+                startActivity(browserIntent);
                 break;
         }
     }

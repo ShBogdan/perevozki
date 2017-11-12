@@ -1,6 +1,5 @@
 package work.to.time.gpsservice.net.response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArchiveOrders {
@@ -11,7 +10,7 @@ public class ArchiveOrders {
         this.data = data;
     }
 
-    public class Order{
+    public class Order {
         private String id;
         private String user;
         private String fromCity;
@@ -46,7 +45,7 @@ public class ArchiveOrders {
             this.waybill = waybill;
         }
 
-        public class Waybill{
+        public class Waybill {
             private String id;
             private String status;
             private String driverSigned;

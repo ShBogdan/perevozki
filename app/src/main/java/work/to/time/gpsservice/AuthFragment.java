@@ -74,8 +74,6 @@ public class AuthFragment extends Fragment implements NetSubscriber {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                MyLog.show("onEditorAction");
-
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     authorization();
                     return true;
@@ -150,6 +148,8 @@ public class AuthFragment extends Fragment implements NetSubscriber {
             if (allNotNull(model)
                     && !model.getToken().equals("false")) {
                 SharedUtils.setAccessToken(mContext, model.getToken());
+                SharedUtils.setUid(mContext, model.getUserId());
+                SharedUtils.setVerifide(mContext, model.getVerified());
                 if (getActivity() != null) {
                     Toast.makeText(mContext, "Авторизация прошла успешно", Toast.LENGTH_SHORT).show();
                     final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
