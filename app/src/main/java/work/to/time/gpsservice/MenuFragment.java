@@ -25,10 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import work.to.time.gpsservice.core.MyApplication;
 import work.to.time.gpsservice.net.NetManager;
-import work.to.time.gpsservice.net.response.ArchiveOrders;
+import work.to.time.gpsservice.net.response.RouteModel;
+import work.to.time.gpsservice.net.response.RouteSuitableModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
 import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.RecyclerViewAdapter;
+import work.to.time.gpsservice.utils.RecyclerViewSuitableAdapter;
 import work.to.time.gpsservice.utils.SharedUtils;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
@@ -40,6 +42,9 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     String fireBase;
     String token;
     RecyclerViewAdapter adapter;
+    RecyclerViewSuitableAdapter suitableAdapter;
+
+    private Integer actualRoutId;
 
     @Bind(R.id.login_progress)
     View mProgressView;
@@ -61,6 +66,9 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
 
     @Bind(R.id.status)
     TextView status;
+
+    @Bind(R.id.actualRout)
+    TextView actualRout;
 
     @Bind(R.id.role)
     TextView role;
@@ -87,34 +95,65 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
             status.setText("Статус: Верифицирован");
         }
         role.setText("Роль: Водитель");
+        showProgress(true);
+        app.getNetManager().activeRoutes(fireBase, token, false);
 
         return view;
     }
 
+
     @Override
     public void onNetSuccess(int requestId, Object data) {
-        if (requestId == NetManager.REQUEST_ACTIVE_ORDERS) {
-            massage.setText((String) data);
-            showProgress(false);
-        }
-        if (requestId == NetManager.REQUEST_SUITABLE_ORDERS) {
-            massage.setText((String) data);
-            showProgress(false);
-        }
-        if (requestId == NetManager.REQUEST_ARCHIVE_ORDERS) {
-            massage.setText((String) data);
-//            ArchiveOrders orders = (ArchiveOrders) data;
-//            List<ArchiveOrders.Order> orderList = orders.data;
-//
-//            adapter = new RecyclerViewAdapter(orderList);
-//            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-//            recyclerView.setLayoutManager(mLayoutManager);
-//            recyclerView.setItemAnimator(new DefaultItemAnimator());
-//            recyclerView.setAdapter(adapter);
-//            adapter.notifyDataSetChanged();
+        MyLog.show("onNetSuccess");
 
-            showProgress(false);
+        if (requestId == NetManager.REQUEST_ACTIVE_ROUTES) {
+            RouteModel orders = (RouteModel) data;
+            List<RouteModel.Rotes> orderList = orders.data;
+
+            for (RouteModel.Rotes r : orderList) {
+                if (allNotNull(r.getCurrent())
+                        && r.getCurrent()) {
+                    actualRout.setText(String.format("Маршрут: %s - %s", r.getFromCity(), r.getToCity()));
+                    actualRoutId = r.getId();
+                }
+            }
+            active.setText(String.format("АКТИВНЫЕ(%s)", orderList.size()));
+            app.getNetManager().suitableRoutes(actualRoutId.toString(), token, true);
+
+            adapter = new RecyclerViewAdapter(orderList);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
+        if (requestId == NetManager.REQUEST_SUITABLE_ROUTES) {
+            RouteSuitableModel orders = (RouteSuitableModel) data;
+            List<RouteSuitableModel.RotesSuitable> orderList = orders.data;
+
+            suitableAdapter = new RecyclerViewSuitableAdapter(orderList);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(suitableAdapter);
+            suitableAdapter.notifyDataSetChanged();
+        }
+        if (requestId == NetManager.REQUEST_ACTIVE_ROUTES_INFO) {
+            RouteModel orders = (RouteModel) data;
+            List<RouteModel.Rotes> orderList = orders.data;
+
+        }
+        if (requestId == NetManager.REQUEST_SUITABLE_ROUTES_INFO) {
+            RouteSuitableModel orders = (RouteSuitableModel) data;
+            List<RouteSuitableModel.RotesSuitable> orderList = orders.data;
+
+            suitable.setText(String.format("ПОДХОДЯЩИЕ(%s)", orderList.size()));
+        }
+
+        if (requestId == NetManager.REQUEST_ARCHIVE_ROUTES) {
+        }
+        showProgress(false);
+
     }
 
     @Override
@@ -134,11 +173,11 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
         switch (v.getId()) {
             case R.id.active:
                 showProgress(true);
-                app.getNetManager().activeOrders(fireBase, token);
+                app.getNetManager().activeRoutes(fireBase, token, false);
                 break;
             case R.id.suitable:
                 showProgress(true);
-                app.getNetManager().suitableOrders(fireBase, token);
+                app.getNetManager().suitableRoutes(actualRoutId.toString(), token, false);
                 break;
             case R.id.verify:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.REGISTRATION_URL));

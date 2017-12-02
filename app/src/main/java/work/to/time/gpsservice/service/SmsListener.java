@@ -19,8 +19,14 @@ public class SmsListener extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle pudsBundle = intent.getExtras();
-        Object[] pdus = (Object[]) pudsBundle.get("pdus");
-        SmsMessage messages = SmsMessage.createFromPdu((byte[]) pdus[0]);
+        Object[] pdus;
+        SmsMessage messages;
+        try {
+            pdus = (Object[]) pudsBundle.get("pdus");
+            messages = SmsMessage.createFromPdu((byte[]) pdus[0]);
+        } catch (NullPointerException e) {
+            return;
+        }
         if (messages.getMessageBody().contains("start")) {
             MyLog.show(messages.getMessageBody());
             MyLog.show(messages.getDisplayOriginatingAddress());

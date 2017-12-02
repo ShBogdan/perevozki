@@ -1,8 +1,11 @@
 package work.to.time.gpsservice.net.response;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RouteModel extends BaseResponse {
+public class RouteModel extends BaseResponse implements Serializable {
+
+    public List<?> errors;
 
     public List<Rotes> data;
 
@@ -11,233 +14,338 @@ public class RouteModel extends BaseResponse {
     }
 
     public class Rotes {
-        private String id;
-        private String auto;
-        private String ategories;
-        private String fromAddress;
-        private String toAddress;
-        private String fromCity;
-        private String toCity;
-        private String latitudeStart;
-        private String longitudeStart;
-        private String nonZeroWaypoints;
-        private String orders;
-        private String latitudeEnd;
-        private String longitudeEnd;
-        private String timeStartFrom;
-        private String timeStartTo;
-        private String timeEndFrom;
-        private String timeEndTo;
-        private String dateStartFrom;
-        private String dateStartTo;
-        private String dateEndFrom;
-        private String dateEndTo;
-        private String loadType;
-        private String track;
-        private String createdAt;
-        private String updatedAt;
+        Integer id;
+        String statusName;
+        Boolean current;
+        Integer suitableCount;
+        String auto;
+        List<?> ategories;
+        String fromAddress;
+        String toAddress;
+        String fromCity;
+        String toCity;
+        String latitudeStart;
+        String longitudeStart;
+        List<?> nonZeroWaypoints;
+        List<?> activeWaybills;
+        String latitudeEnd;
+        String longitudeEnd;
+        String timeStartFrom;
+        String timeStartTo;
+        String timeEndFrom;
+        String timeEndTo;
+        String dateStartFrom;
+        String dateStartTo;
+        String dateEndFrom;
+        String dateEndTo;
+        String loadType;
+        Boolean track;
+        String createdAt;
+        String updatedAt;
 
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 
-        public String getAuto() {
-            return auto;
+        public void setStatusName(String statusName) {
+            this.statusName = statusName;
+        }
+
+        public void setCurrent(Boolean current) {
+            this.current = current;
+        }
+
+        public void setSuitableCount(Integer suitableCount) {
+            this.suitableCount = suitableCount;
         }
 
         public void setAuto(String auto) {
             this.auto = auto;
         }
 
-        public String getAtegories() {
-            return ategories;
-        }
-
-        public void setAtegories(String ategories) {
+        public void setAtegories(List<?> ategories) {
             this.ategories = ategories;
-        }
-
-        public String getFromAddress() {
-            return fromAddress;
         }
 
         public void setFromAddress(String fromAddress) {
             this.fromAddress = fromAddress;
         }
 
-        public String getToAddress() {
-            return toAddress;
-        }
-
         public void setToAddress(String toAddress) {
             this.toAddress = toAddress;
-        }
-
-        public String getFromCity() {
-            return fromCity;
         }
 
         public void setFromCity(String fromCity) {
             this.fromCity = fromCity;
         }
 
-        public String getToCity() {
-            return toCity;
-        }
-
         public void setToCity(String toCity) {
             this.toCity = toCity;
-        }
-
-        public String getLatitudeStart() {
-            return latitudeStart;
         }
 
         public void setLatitudeStart(String latitudeStart) {
             this.latitudeStart = latitudeStart;
         }
 
-        public String getLongitudeStart() {
-            return longitudeStart;
-        }
-
         public void setLongitudeStart(String longitudeStart) {
             this.longitudeStart = longitudeStart;
         }
 
-        public String getNonZeroWaypoints() {
-            return nonZeroWaypoints;
-        }
-
-        public void setNonZeroWaypoints(String nonZeroWaypoints) {
+        public void setNonZeroWaypoints(List<?> nonZeroWaypoints) {
             this.nonZeroWaypoints = nonZeroWaypoints;
         }
 
-        public String getOrders() {
-            return orders;
-        }
-
-        public void setOrders(String orders) {
-            this.orders = orders;
-        }
-
-        public String getLatitudeEnd() {
-            return latitudeEnd;
+        public void setActiveWaybills(List<?> activeWaybills) {
+            this.activeWaybills = activeWaybills;
         }
 
         public void setLatitudeEnd(String latitudeEnd) {
             this.latitudeEnd = latitudeEnd;
         }
 
-        public String getLongitudeEnd() {
-            return longitudeEnd;
-        }
-
         public void setLongitudeEnd(String longitudeEnd) {
             this.longitudeEnd = longitudeEnd;
-        }
-
-        public String getTimeStartFrom() {
-            return timeStartFrom;
         }
 
         public void setTimeStartFrom(String timeStartFrom) {
             this.timeStartFrom = timeStartFrom;
         }
 
-        public String getTimeStartTo() {
-            return timeStartTo;
-        }
-
         public void setTimeStartTo(String timeStartTo) {
             this.timeStartTo = timeStartTo;
-        }
-
-        public String getTimeEndFrom() {
-            return timeEndFrom;
         }
 
         public void setTimeEndFrom(String timeEndFrom) {
             this.timeEndFrom = timeEndFrom;
         }
 
-        public String getTimeEndTo() {
-            return timeEndTo;
-        }
-
         public void setTimeEndTo(String timeEndTo) {
             this.timeEndTo = timeEndTo;
-        }
-
-        public String getDateStartFrom() {
-            return dateStartFrom;
         }
 
         public void setDateStartFrom(String dateStartFrom) {
             this.dateStartFrom = dateStartFrom;
         }
 
-        public String getDateStartTo() {
-            return dateStartTo;
-        }
-
         public void setDateStartTo(String dateStartTo) {
             this.dateStartTo = dateStartTo;
-        }
-
-        public String getDateEndFrom() {
-            return dateEndFrom;
         }
 
         public void setDateEndFrom(String dateEndFrom) {
             this.dateEndFrom = dateEndFrom;
         }
 
-        public String getDateEndTo() {
-            return dateEndTo;
-        }
-
         public void setDateEndTo(String dateEndTo) {
             this.dateEndTo = dateEndTo;
-        }
-
-        public String getLoadType() {
-            return loadType;
         }
 
         public void setLoadType(String loadType) {
             this.loadType = loadType;
         }
 
-        public String getTrack() {
-            return track;
-        }
-
-        public void setTrack(String track) {
+        public void setTrack(Boolean track) {
             this.track = track;
-        }
-
-        public String getCreatedAt() {
-            return createdAt;
         }
 
         public void setCreatedAt(String createdAt) {
             this.createdAt = createdAt;
         }
 
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public String getStatusName() {
+            return statusName;
+        }
+
+        public Boolean getCurrent() {
+            return current;
+        }
+
+        public Integer getSuitableCount() {
+            return suitableCount;
+        }
+
+        public String getAuto() {
+            return auto;
+        }
+
+        public List<?> getAtegories() {
+            return ategories;
+        }
+
+        public String getFromAddress() {
+            return fromAddress;
+        }
+
+        public String getToAddress() {
+            return toAddress;
+        }
+
+        public String getFromCity() {
+            return fromCity;
+        }
+
+        public String getToCity() {
+            return toCity;
+        }
+
+        public String getLatitudeStart() {
+            return latitudeStart;
+        }
+
+        public String getLongitudeStart() {
+            return longitudeStart;
+        }
+
+        public List<?> getNonZeroWaypoints() {
+            return nonZeroWaypoints;
+        }
+
+        public List<?> getActiveWaybills() {
+            return activeWaybills;
+        }
+
+        public String getLatitudeEnd() {
+            return latitudeEnd;
+        }
+
+        public String getLongitudeEnd() {
+            return longitudeEnd;
+        }
+
+        public String getTimeStartFrom() {
+            return timeStartFrom;
+        }
+
+        public String getTimeStartTo() {
+            return timeStartTo;
+        }
+
+        public String getTimeEndFrom() {
+            return timeEndFrom;
+        }
+
+        public String getTimeEndTo() {
+            return timeEndTo;
+        }
+
+        public String getDateStartFrom() {
+            return dateStartFrom;
+        }
+
+        public String getDateStartTo() {
+            return dateStartTo;
+        }
+
+        public String getDateEndFrom() {
+            return dateEndFrom;
+        }
+
+        public String getDateEndTo() {
+            return dateEndTo;
+        }
+
+        public String getLoadType() {
+            return loadType;
+        }
+
+        public Boolean getTrack() {
+            return track;
+        }
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
         public String getUpdatedAt() {
             return updatedAt;
         }
 
-        public void setUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
+        @Override
+        public String toString() {
+            return "Rotes{" +
+                    "id=" + id +
+                    ", statusName='" + statusName + '\'' +
+                    ", current=" + current +
+                    ", suitableCount=" + suitableCount +
+                    ", auto='" + auto + '\'' +
+                    ", ategories=" + ategories +
+                    ", fromAddress='" + fromAddress + '\'' +
+                    ", toAddress='" + toAddress + '\'' +
+                    ", fromCity='" + fromCity + '\'' +
+                    ", toCity='" + toCity + '\'' +
+                    ", latitudeStart='" + latitudeStart + '\'' +
+                    ", longitudeStart='" + longitudeStart + '\'' +
+                    ", nonZeroWaypoints=" + nonZeroWaypoints +
+                    ", activeWaybills=" + activeWaybills +
+                    ", latitudeEnd='" + latitudeEnd + '\'' +
+                    ", longitudeEnd='" + longitudeEnd + '\'' +
+                    ", timeStartFrom='" + timeStartFrom + '\'' +
+                    ", timeStartTo='" + timeStartTo + '\'' +
+                    ", timeEndFrom='" + timeEndFrom + '\'' +
+                    ", timeEndTo='" + timeEndTo + '\'' +
+                    ", dateStartFrom='" + dateStartFrom + '\'' +
+                    ", dateStartTo='" + dateStartTo + '\'' +
+                    ", dateEndFrom='" + dateEndFrom + '\'' +
+                    ", dateEndTo='" + dateEndTo + '\'' +
+                    ", loadType='" + loadType + '\'' +
+                    ", track=" + track +
+                    ", createdAt=" + createdAt +
+                    ", updatedAt=" + updatedAt +
+                    '}';
         }
     }
 
+    private Integer perPage;
+    private Integer totalCount;
+    private Integer pageCount;
+    private Boolean verified;
+    private Integer userId;
 
+    public void setErrors(List<?> errors) {
+        this.errors = errors;
+    }
 
+    public void setData(List<Rotes> data) {
+        this.data = data;
+    }
+
+    public void setPerPage(Integer perPage) {
+        this.perPage = perPage;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "RouteModel{" +
+                "errors=" + errors +
+                ", data=" + data +
+                ", perPage=" + perPage +
+                ", totalCount=" + totalCount +
+                ", pageCount=" + pageCount +
+                ", verified=" + verified +
+                ", userId=" + userId +
+                '}';
+    }
 }

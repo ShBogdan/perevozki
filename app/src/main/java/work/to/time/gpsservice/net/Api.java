@@ -5,11 +5,15 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import work.to.time.gpsservice.net.response.ArchiveOrders;
 import work.to.time.gpsservice.net.response.AuthModel;
 import work.to.time.gpsservice.net.response.CoordModel;
+import work.to.time.gpsservice.net.response.RouteModel;
+import work.to.time.gpsservice.net.response.RouteSuitableModel;
 
 public interface Api {
 
@@ -31,6 +35,13 @@ public interface Api {
                                @Header("auth") String header);
 
     @FormUrlEncoded
+    @POST("/api/track")
+    Call<ResponseBody> testCoord(@Field("longitude") String longitude,
+                                 @Field("latitude") String latitude,
+                                 @Field("timestamp") String timestamp,
+                                 @Header("auth") String header);
+
+    @FormUrlEncoded
     @POST("/api/orders/active")
     Call<ResponseBody> activeOrders(@Field("deviceId") String deviceId,
                                     @Header("auth") String header);
@@ -47,19 +58,16 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("/api/routes/active")
-    Call<ResponseBody> activeRoutes(@Field("deviceId") String deviceId,
-                                    @Header("auth") String header);
+    Call<RouteModel> activeRoutes(@Field("deviceId") String deviceId,
+                                  @Header("auth") String header);
 
     @FormUrlEncoded
     @POST("/api/routes/archive")
     Call<ArchiveOrders> archiveRoutes(@Field("deviceId") String deviceId,
                                       @Header("auth") String header);
 
-    @FormUrlEncoded
-    @POST("/api/track")
-    Call<ResponseBody> testCoord(@Field("longitude") String longitude,
-                                 @Field("latitude") String latitude,
-                                 @Field("timestamp") String timestamp,
-                                 @Header("auth") String header);
+    @GET("/api/routes/suitable/{id}")
+    Call<RouteSuitableModel> suitableRoutes(@Path("id") String id,
+                                            @Header("auth") String header);
 
 }

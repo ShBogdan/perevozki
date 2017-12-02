@@ -11,48 +11,48 @@ import java.util.List;
 
 import work.to.time.gpsservice.R;
 import work.to.time.gpsservice.net.response.RouteModel;
+import work.to.time.gpsservice.net.response.RouteSuitableModel;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerViewSuitableAdapter.MyViewHolder> {
 
-    private List<RouteModel.Rotes> orders;
+    private List<RouteSuitableModel.RotesSuitable> orders;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView
-                recipient,
-                sender,
                 route,
+                sender,
                 product,
-                toAddress;
+                cost;
 
         public MyViewHolder(View view) {
             super(view);
             route = (TextView) view.findViewById(R.id.route);
             sender = (TextView) view.findViewById(R.id.sender);
-            recipient = (TextView) view.findViewById(R.id.recipient);
+            cost = (TextView) view.findViewById(R.id.cost);
             product = (TextView) view.findViewById(R.id.product);
 
         }
     }
 
-    public RecyclerViewAdapter(List<RouteModel.Rotes> moviesList) {
+    public RecyclerViewSuitableAdapter(List<RouteSuitableModel.RotesSuitable> moviesList) {
         this.orders = moviesList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_element, parent, false);
+                .inflate(R.layout.recycler_view_suitable_route_element, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        RouteModel.Rotes order = orders.get(position);
+        RouteSuitableModel.RotesSuitable order = orders.get(position);
         holder.route.setText(String.format("%s - %s", order.getFromCity(), order.getToCity()));
         holder.sender.setText("Телефон отправителя:" + order.getFromAddress());
-        holder.recipient.setText("Телефон Получателя:" + order.getToAddress());
-        holder.product.setText("Груз:" + order.getAtegories().toString());
+        holder.cost.setText("Цена:" + order.getCost());
+        holder.product.setText("Груз:" + "поле отсутствует");
     }
 
     @Override

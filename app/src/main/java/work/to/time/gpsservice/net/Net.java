@@ -16,4 +16,10 @@ public interface Net extends Publisher<NetSubscriber> {
 
     void suitableOrders(String id, String token);
 
+    void activeRoutes(String deviceId, String token, boolean info);
+
+    void archiveRoutes(String deviceId, String token);
+
+    void suitableRoutes(String id, String token, boolean info);
+
 }
