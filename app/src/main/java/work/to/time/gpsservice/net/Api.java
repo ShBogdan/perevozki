@@ -9,11 +9,11 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import work.to.time.gpsservice.net.response.ActiveOrders;
 import work.to.time.gpsservice.net.response.ArchiveOrders;
 import work.to.time.gpsservice.net.response.AuthModel;
 import work.to.time.gpsservice.net.response.CoordModel;
 import work.to.time.gpsservice.net.response.RouteModel;
-import work.to.time.gpsservice.net.response.RouteSuitableModel;
 
 public interface Api {
 
@@ -67,7 +67,10 @@ public interface Api {
                                       @Header("auth") String header);
 
     @GET("/api/routes/suitable/{id}")
-    Call<RouteSuitableModel> suitableRoutes(@Path("id") String id,
-                                            @Header("auth") String header);
+    Call<ActiveOrders> suitableRoutes(@Path("id") String id,
+                                            @Header("auth") String header,
+                                            @Header("Language") String language
+
+    );
 
 }

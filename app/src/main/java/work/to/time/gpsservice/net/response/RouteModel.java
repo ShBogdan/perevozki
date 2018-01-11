@@ -15,11 +15,13 @@ public class RouteModel extends BaseResponse implements Serializable {
 
     public class Rotes {
         Integer id;
+        List<ActiveOrders.Order> orders;
+        String status;
         String statusName;
         Boolean current;
         Integer suitableCount;
         String auto;
-        List<?> ategories;
+        List<?> categories;
         String fromAddress;
         String toAddress;
         String fromCity;
@@ -43,6 +45,14 @@ public class RouteModel extends BaseResponse implements Serializable {
         String createdAt;
         String updatedAt;
 
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
         public void setId(Integer id) {
             this.id = id;
         }
@@ -63,8 +73,8 @@ public class RouteModel extends BaseResponse implements Serializable {
             this.auto = auto;
         }
 
-        public void setAtegories(List<?> ategories) {
-            this.ategories = ategories;
+        public void setCategories(List<?> categories) {
+            this.categories = categories;
         }
 
         public void setFromAddress(String fromAddress) {
@@ -175,8 +185,8 @@ public class RouteModel extends BaseResponse implements Serializable {
             return auto;
         }
 
-        public List<?> getAtegories() {
-            return ategories;
+        public List<?> getCategories() {
+            return categories;
         }
 
         public String getFromAddress() {
@@ -267,15 +277,24 @@ public class RouteModel extends BaseResponse implements Serializable {
             return updatedAt;
         }
 
+        public List<ActiveOrders.Order> getOrders() {
+            return orders;
+        }
+
+        public void setOrders(List<ActiveOrders.Order> orders) {
+            this.orders = orders;
+        }
+
         @Override
         public String toString() {
             return "Rotes{" +
                     "id=" + id +
                     ", statusName='" + statusName + '\'' +
+                    ", orders='" + orders + '\'' +
                     ", current=" + current +
                     ", suitableCount=" + suitableCount +
                     ", auto='" + auto + '\'' +
-                    ", ategories=" + ategories +
+                    ", categories=" + categories +
                     ", fromAddress='" + fromAddress + '\'' +
                     ", toAddress='" + toAddress + '\'' +
                     ", fromCity='" + fromCity + '\'' +
@@ -307,6 +326,7 @@ public class RouteModel extends BaseResponse implements Serializable {
     private Integer pageCount;
     private Boolean verified;
     private Integer userId;
+    private String role;
 
     public void setErrors(List<?> errors) {
         this.errors = errors;

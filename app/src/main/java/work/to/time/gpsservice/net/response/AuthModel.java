@@ -6,12 +6,14 @@ public class AuthModel extends BaseResponse {
     private String error;
     private Boolean verified;
     private Integer userId;
+    private String role;
 
-    public AuthModel(String token, String error, Boolean verified, Integer userId) {
+    public AuthModel(String token, String error, Boolean verified, Integer userId, String role) {
         this.token = token;
         this.error = error;
         this.verified = verified;
         this.userId = userId;
+        this.role = role;
     }
 
     public String getToken() {
@@ -46,9 +48,16 @@ public class AuthModel extends BaseResponse {
         this.userId = userId;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -58,7 +67,9 @@ public class AuthModel extends BaseResponse {
         if (error != null ? !error.equals(authModel.error) : authModel.error != null) return false;
         if (verified != null ? !verified.equals(authModel.verified) : authModel.verified != null)
             return false;
-        return userId != null ? userId.equals(authModel.userId) : authModel.userId == null;
+        if (userId != null ? !userId.equals(authModel.userId) : authModel.userId != null)
+            return false;
+        return role != null ? role.equals(authModel.role) : authModel.role == null;
     }
 
     @Override
@@ -67,6 +78,7 @@ public class AuthModel extends BaseResponse {
         result = 31 * result + (error != null ? error.hashCode() : 0);
         result = 31 * result + (verified != null ? verified.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
 
@@ -77,6 +89,7 @@ public class AuthModel extends BaseResponse {
                 ", error='" + error + '\'' +
                 ", verified=" + verified +
                 ", userId=" + userId +
+                ", role='" + role + '\'' +
                 '}';
     }
 

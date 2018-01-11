@@ -39,6 +39,7 @@ import work.to.time.gpsservice.utils.PermissionsUtils;
 import work.to.time.gpsservice.utils.SharedUtils;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+import static org.apache.commons.lang3.ObjectUtils.mode;
 
 public class AuthFragment extends Fragment implements NetSubscriber {
 
@@ -146,6 +147,7 @@ public class AuthFragment extends Fragment implements NetSubscriber {
             showProgress(false);
             AuthModel model = (AuthModel) data;
             if (allNotNull(model)
+                    && model.getRole().equals("driver")
                     && !model.getToken().equals("false")) {
                 SharedUtils.setAccessToken(mContext, model.getToken());
                 SharedUtils.setUid(mContext, model.getUserId());

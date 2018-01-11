@@ -14,11 +14,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import work.to.time.gpsservice.BuildConfig;
+import work.to.time.gpsservice.net.response.ActiveOrders;
 import work.to.time.gpsservice.net.response.ArchiveOrders;
 import work.to.time.gpsservice.net.response.AuthModel;
 import work.to.time.gpsservice.net.response.CoordModel;
 import work.to.time.gpsservice.net.response.RouteModel;
-import work.to.time.gpsservice.net.response.RouteSuitableModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
 import work.to.time.gpsservice.utils.MyLog;
 
@@ -35,10 +35,8 @@ public class NetManager implements Net {
     public static final int REQUEST_ARCHIVE_ORDERS = 44;
     public static final int REQUEST_SUITABLE_ORDERS = 55;
     public static final int REQUEST_ACTIVE_ROUTES = 66;
-    public static final int REQUEST_ACTIVE_ROUTES_INFO = 661;
     public static final int REQUEST_ARCHIVE_ROUTES = 77;
     public static final int REQUEST_SUITABLE_ROUTES = 88;
-    public static final int REQUEST_SUITABLE_ROUTES_INFO = 881;
 
     public NetManager() {
         retrofit = new Retrofit.Builder()
@@ -87,6 +85,7 @@ public class NetManager implements Net {
         api.activeOrders(deviceId, "Bearer " + token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                MyLog.show("response.body()" + response.body().toString());
                 try {
                     notifySuccess(REQUEST_ACTIVE_ORDERS, response.body().string());
                 } catch (IOException e) {
@@ -108,15 +107,11 @@ public class NetManager implements Net {
     }
 
     @Override
-    public void activeRoutes(String deviceId, String token, final boolean info) {
+    public void activeRoutes(String deviceId, String token) {
         api.activeRoutes(deviceId, "Bearer " + token).enqueue(new Callback<RouteModel>() {
             @Override
             public void onResponse(Call<RouteModel> call, Response<RouteModel> response) {
-                if (!info) {
-                    notifySuccess(REQUEST_ACTIVE_ROUTES, response.body());
-                } else {
-                    notifySuccess(REQUEST_ACTIVE_ROUTES_INFO, response.body());
-                }
+                notifySuccess(REQUEST_ACTIVE_ROUTES, response.body());
             }
 
             @Override
@@ -164,7 +159,7 @@ public class NetManager implements Net {
         api.suitableOrders(deviceId, "Bearer " + token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                notifySuccess(REQUEST_SUITABLE_ORDERS, response.body());
+               notifySuccess(REQUEST_SUITABLE_ORDERS, response.body());
             }
 
             @Override
@@ -176,19 +171,15 @@ public class NetManager implements Net {
     }
 
     @Override
-    public void suitableRoutes(String suitableRoutesId, String token, final boolean info) {
-        api.suitableRoutes(suitableRoutesId, "Bearer " + token).enqueue(new Callback<RouteSuitableModel>() {
+    public void suitableRoutes(String suitableRoutesId, String token) {
+        api.suitableRoutes(suitableRoutesId, "Bearer " + token, "en").enqueue(new Callback<ActiveOrders>() {
             @Override
-            public void onResponse(Call<RouteSuitableModel> call, Response<RouteSuitableModel> response) {
-                if (!info) {
-                    notifySuccess(REQUEST_SUITABLE_ROUTES, response.body());
-                } else {
-                    notifySuccess(REQUEST_SUITABLE_ROUTES_INFO, response.body());
-                }
+            public void onResponse(Call<ActiveOrders> call, Response<ActiveOrders> response) {
+                notifySuccess(REQUEST_SUITABLE_ROUTES, response.body());
             }
 
             @Override
-            public void onFailure(Call<RouteSuitableModel> call, Throwable t) {
+            public void onFailure(Call<ActiveOrders> call, Throwable t) {
                 notifyError(REQUEST_SUITABLE_ROUTES, t.getLocalizedMessage());
                 t.printStackTrace();
             }
