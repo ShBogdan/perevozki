@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import test.test;
 import work.to.time.gpsservice.BuildConfig;
 import work.to.time.gpsservice.R;
 import work.to.time.gpsservice.net.response.ActiveOrders;
@@ -19,6 +22,7 @@ import work.to.time.gpsservice.net.response.ActiveOrders;
 public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerViewSuitableAdapter.MyViewHolder> {
 
     private List<ActiveOrders.Order> orders;
+    private Integer currentRouteId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView
@@ -27,7 +31,10 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
                 product,
                 cost,
                 isNew;
-        public Button detail;
+        public Button
+                detail,
+                requestPhone,
+                goToCreateWayBill;
 
         public MyViewHolder(View view) {
             super(view);
@@ -37,11 +44,24 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
             product = (TextView) view.findViewById(R.id.product);
             isNew = (TextView) view.findViewById(R.id.isNew);
             detail = (Button) view.findViewById(R.id.detail);
+            requestPhone = (Button) view.findViewById(R.id.requestPhone);
+            goToCreateWayBill = (Button) view.findViewById(R.id.goToCreateWayBill);
         }
     }
 
-    public RecyclerViewSuitableAdapter(List<ActiveOrders.Order> moviesList) {
+    public RecyclerViewSuitableAdapter(List<ActiveOrders.Order> moviesList, Integer currentRouteId) {
+        Collections.sort(moviesList, new Comparator<ActiveOrders.Order>() {
+            public int compare(ActiveOrders.Order o1, ActiveOrders.Order o2) {
+                Integer x1 = o1.getStatus().length();
+                Integer x2 = o2.getStatus().length();
+                int sComp = x1.compareTo(x2);
+                if (sComp != 0) {
+                    return sComp;
+                } else return 0;
+            }
+        });
         this.orders = moviesList;
+        this.currentRouteId = currentRouteId;
     }
 
     @Override
@@ -59,20 +79,47 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
         if (!order.getStatus().toLowerCase().equals("new")) holder.isNew.setVisibility(View.GONE);
 
         holder.route.setText(String.format("%s - %s", order.getFromCity(), order.getToCity()));
-        holder.sender.setText("Телефон отправителя: " + order.getFromAddress());
         holder.cost.setText("Цена: " + order.getStatus());
         holder.product.setText("Груз: " + order.getGoodtypes().toString());
         holder.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/orders/view?id=" + order.getId()));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/orders/view?id=" + order.getId() + "?suitable=" + currentRouteId));
                 view.getContext().startActivity(browserIntent);
             }
         });
+
+        if (order.getCanCreateRequest()) {
+            holder.sender.setText("Телефон отправителя: ");
+            holder.requestPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/waybills/add-request?orderId=" + order.getId() + "&routeId=" + currentRouteId));
+                    view.getContext().startActivity(browserIntent);
+                }
+            });
+        } else {
+            holder.requestPhone.setVisibility(View.GONE);
+            holder.sender.setText("Телефон отправителя: " + order.getSenderPhone());
+        }
+
+        if (order.getCanCreateWaybill()) {
+            holder.goToCreateWayBill.setVisibility(View.GONE);
+        } else {
+            holder.goToCreateWayBill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/waybills/create?orderId=" + order.getId() + "&routeId=" + currentRouteId));
+                    view.getContext().startActivity(browserIntent);
+                }
+            });
+        }
+
     }
 
     @Override
     public int getItemCount() {
         return orders.size();
     }
+
 }

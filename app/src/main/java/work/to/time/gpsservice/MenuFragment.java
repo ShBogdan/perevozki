@@ -43,6 +43,8 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     String token;
     RecyclerViewAdapter adapter;
     RecyclerViewSuitableAdapter suitableAdapter;
+    Integer currentRouteId;
+
 
     private Integer actualRoutId;
 
@@ -107,6 +109,7 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
                 if (allNotNull(r.getCurrent())
                         && r.getCurrent()) {
                     MyLog.show(r.toString());
+                    currentRouteId = r.getId();
 
                     actualRout.setText(String.format("Маршрут: %s - %s", r.getFromCity(), r.getToCity()));
                     actualRoutId = r.getId();
@@ -126,7 +129,7 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
             List<ActiveOrders.Order> orderList = orders.data;
             MyLog.show(orderList.get(0).toString());
 
-            suitableAdapter = new RecyclerViewSuitableAdapter(orderList);
+            suitableAdapter = new RecyclerViewSuitableAdapter(orderList, currentRouteId);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(suitableAdapter);

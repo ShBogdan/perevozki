@@ -45,23 +45,50 @@
             android:textSize="16sp"
             tools:text="Груз:" />
 
-        <TextView
-            android:id="@+id/sender"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/sender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Телефон отправителя:"
+                android:textSize="16sp"
+                tools:text="Телефон отправителя:" />
+            <Button
+                android:id="@+id/requestPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Запросить контак"
+                android:textSize="10sp"
+                tools:text="Запросить контак" />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/goToCreateWayBill"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Телефон отправителя:"
-            android:textSize="16sp"
-            tools:text="Телефон отправителя:" />
-
-
+            android:layout_gravity="right"
+            android:text="Оформить накладную"
+            android:textSize="10sp"
+            tools:text="Оформить накладную" />
         <Button
             android:id="@+id/detail"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="Подробней"
-            android:textSize="16sp"
+            android:textSize="10sp"
             tools:text="Подробней" />
+    </LinearLayout>
+
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

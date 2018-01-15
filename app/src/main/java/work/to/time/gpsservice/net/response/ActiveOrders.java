@@ -42,6 +42,8 @@ public class ActiveOrders {
         private String wantTrack;
         private String createdAt;
         private String updatedAt;
+        private Boolean canCreateWaybill;
+        private Boolean canCreateRequest;
 
         public Order(ArchiveOrders.Order.Waybill waybill) {
             this.waybill = waybill;
@@ -273,6 +275,22 @@ public class ActiveOrders {
 
         public void setUpdatedAt(String updatedAt) {
             this.updatedAt = updatedAt;
+        }
+
+        public Boolean getCanCreateWaybill() {
+            return canCreateWaybill;
+        }
+
+        public void setCanCreateWaybill(Boolean canCreateWaybill) {
+            this.canCreateWaybill = canCreateWaybill;
+        }
+
+        public Boolean getCanCreateRequest() {
+            return canCreateRequest;
+        }
+
+        public void setCanCreateRequest(Boolean canCreateRequest) {
+            this.canCreateRequest = canCreateRequest;
         }
 
         public class Waybill {
