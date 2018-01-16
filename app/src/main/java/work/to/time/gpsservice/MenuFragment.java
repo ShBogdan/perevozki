@@ -129,7 +129,7 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
             List<ActiveOrders.Order> orderList = orders.data;
             MyLog.show(orderList.get(0).toString());
 
-            suitableAdapter = new RecyclerViewSuitableAdapter(orderList, currentRouteId);
+            suitableAdapter = new RecyclerViewSuitableAdapter(orderList, currentRouteId, orders.verified);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(suitableAdapter);

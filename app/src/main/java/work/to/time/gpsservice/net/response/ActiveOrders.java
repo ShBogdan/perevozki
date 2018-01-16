@@ -7,6 +7,8 @@ public class ActiveOrders {
 
     public List<ActiveOrders.Order> data ;
 
+    public Boolean verified;
+
     public ActiveOrders(List<ActiveOrders.Order> data) {
         this.data = data;
     }

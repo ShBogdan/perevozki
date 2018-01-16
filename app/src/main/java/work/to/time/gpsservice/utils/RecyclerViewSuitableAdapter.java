@@ -9,20 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import test.test;
 import work.to.time.gpsservice.BuildConfig;
 import work.to.time.gpsservice.R;
 import work.to.time.gpsservice.net.response.ActiveOrders;
+
+import static org.apache.commons.lang3.Validate.notNull;
 
 public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerViewSuitableAdapter.MyViewHolder> {
 
     private List<ActiveOrders.Order> orders;
     private Integer currentRouteId;
+    private Boolean verified;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView
@@ -49,7 +52,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    public RecyclerViewSuitableAdapter(List<ActiveOrders.Order> moviesList, Integer currentRouteId) {
+    public RecyclerViewSuitableAdapter(List<ActiveOrders.Order> moviesList, Integer currentRouteId, Boolean verified) {
         Collections.sort(moviesList, new Comparator<ActiveOrders.Order>() {
             public int compare(ActiveOrders.Order o1, ActiveOrders.Order o2) {
                 Integer x1 = o1.getStatus().length();
@@ -60,6 +63,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
                 } else return 0;
             }
         });
+        this.verified = verified;
         this.orders = moviesList;
         this.currentRouteId = currentRouteId;
     }
@@ -94,8 +98,13 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
             holder.requestPhone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/waybills/add-request?orderId=" + order.getId() + "&routeId=" + currentRouteId));
-                    view.getContext().startActivity(browserIntent);
+                    if (verified) {
+                        // FIXME: 016 16.01.18 ролистать в верх
+                        Toast.makeText(view.getContext(), "Пройдите верификацию", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/waybills/add-request?orderId=" + order.getId() + "&routeId=" + currentRouteId));
+                        view.getContext().startActivity(browserIntent);
+                    }
                 }
             });
         } else {
@@ -103,7 +112,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
             holder.sender.setText("Телефон отправителя: " + order.getSenderPhone());
         }
 
-        if (order.getCanCreateWaybill()) {
+        if (!order.getCanCreateWaybill() && order.getCanCreateRequest()) {
             holder.goToCreateWayBill.setVisibility(View.GONE);
         } else {
             holder.goToCreateWayBill.setOnClickListener(new View.OnClickListener() {
