@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "571875617677-0oj0fkivtfdrb5g2qc3v5gi68d8ntk1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bogdan.perevozky",
+            "certificate_hash": "933e899d214fe7668773e0f3a529e53794326587"
+          }
+        },
+        {
           "client_id": "571875617677-7nb5hh84uu3fjfvfjktpr51unpfads6u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bogdan.perevozky",
-            "certificate_hash": "2E6ADD1C449BDB80E2EB3D056866D84A62C655B0"
+            "certificate_hash": "2e6add1c449bdb80e2eb3d056866d84a62c655b0"
           }
         },
         {
@@ -44,37 +52,6 @@
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:571875617677:android:25506c941fe04582",
-        "android_client_info": {
-          "package_name": "work.to.time.gpsservice"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "571875617677-f2m8cvfcl55lvlti5d12sa0tnqjvlc2c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBz8hUr79Zm7y7ir5wlrerB0rovuzZjstI"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

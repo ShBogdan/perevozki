@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,8 +24,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,10 +63,13 @@ public class LoginActivity extends FragmentActivity {
     TextView tvIsWatching;
     @Bind(R.id.switchGPS)
     Switch mSwitchGPS;
-//    @Bind(R.id.ic_notifications_1)
+    //    @Bind(R.id.ic_notifications_1)
 //    ImageView ivNotify_1;
-//    @Bind(R.id.ic_notifications_2)
-//    ImageView ivNotify_2;
+
+    @Bind(R.id.ic_notifications_2)
+    ImageView ivNotify_2;
+    @Bind(R.id.nr_notifications_2)
+    TextView tvNotify_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +83,20 @@ public class LoginActivity extends FragmentActivity {
 //        Drawable res = getResources().getDrawable(imageResource);
 //        ivNotify_1.setImageDrawable(res);
 //
-//        String uri1 = "@drawable/ic_notifications";
-//        int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
-//        Drawable res1 = getResources().getDrawable(imageResource1);
-//        ivNotify_2.setImageDrawable(res1);
+        String uri1 = "@drawable/ic_notifications";
+        int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
+        Drawable res1 = getResources().getDrawable(imageResource1);
+        ivNotify_2.setImageDrawable(res1);
+        if(!SharedUtils.getFcmMessage(getApplicationContext()).equals("emptyString")){
+            tvNotify_2.setText("1");
+            ivNotify_2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(), SharedUtils.getFcmMessage(getApplicationContext()), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -12,8 +12,13 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import work.to.time.gpsservice.LoginActivity;
 import work.to.time.gpsservice.R;
+import work.to.time.gpsservice.utils.Constants;
+import work.to.time.gpsservice.utils.SharedUtils;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyLog";
@@ -21,29 +26,53 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     {
         Log.d(TAG, "MyFirebaseMessagingService");
     }
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.d("MyLog", "From: " + remoteMessage.getFrom());
-        sendNotification(remoteMessage.getNotification().getBody());
+        Map<String, String> remoteMessages = new LinkedHashMap<>();
 
-        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d("MyLog", "Message data payload: " + remoteMessage.getData());
+            remoteMessages = remoteMessage.getData();
+
         }
 
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d("MyLog", "Message Notification Body: " + remoteMessage.getNotification().getBody());
+        if (remoteMessages.containsKey("startTracing")) {
+            if (Boolean.parseBoolean(remoteMessages.get("gpsTraced"))) {
+                Intent locationService = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                locationService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(locationService);
+
+                Intent startGpsTracker = new Intent(getApplicationContext(), GPSTracker.class);
+                startGpsTracker.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
+                startService(startGpsTracker);
+            } else {
+                Intent stopGpsTracker = new Intent(getApplicationContext(), GPSTracker.class);
+                stopGpsTracker.setAction(Constants.ACTION.STOPFOREGROUND_ACTION);
+                getBaseContext().startService(stopGpsTracker);
+            }
         }
+
+        if (remoteMessages.containsKey("notification")) {
+            sendNotification(remoteMessages.get("notification"));
+        }
+        Log.d(TAG, "пишем");
+
+        if (remoteMessages.containsKey("innerNotification")) {
+            Log.d(TAG, "пишем" + remoteMessages.get("innerNotification"));
+
+            SharedUtils.setFcmMessage(this, remoteMessages.get("innerNotification"));
+        }
+
     }
-//
+
+
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_wheel)
                 .setContentTitle("Perevozki Message")

@@ -12,6 +12,7 @@ public final class SharedUtils {
     private static final String DEVICE_ID = "deviceId";
     private static final String UID = "uid";
     private static final String VERIFY = "verify";
+    private static final String FCM_MESSAGE = "fcmMessage";
 
 
     private static SharedPreferences getSharedPreferences(@NonNull Context context) {
@@ -72,6 +73,15 @@ public final class SharedUtils {
 
     public static void setAccessDeviceId(@NonNull Context context, String value) {
         save(context, DEVICE_ID, value);
+    }
+
+    public static void setFcmMessage(@NonNull Context context, String value) {
+        save(context, FCM_MESSAGE, value);
+    }
+
+    @Nullable
+    public static String getFcmMessage(@NonNull Context context) {
+        return getSharedPreferences(context).getString(FCM_MESSAGE, "emptyString");
     }
 
     public static void setUid(@NonNull Context context, int value) {

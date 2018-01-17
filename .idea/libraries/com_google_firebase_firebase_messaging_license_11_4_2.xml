@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.google.firebase:firebase-messaging-license-11.4.2">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../gradle-4.2.1-bin/gradle-4.2.1/caches/transforms-1/files-1.1/firebase-messaging-license-11.4.2.aar/45bb6a6d8a9892acc0cefce51875fa53/res" />
-      <root url="jar://$PROJECT_DIR$/../../gradle-4.2.1-bin/gradle-4.2.1/caches/transforms-1/files-1.1/firebase-messaging-license-11.4.2.aar/45bb6a6d8a9892acc0cefce51875fa53/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../gradle-4.2.1-bin/gradle-4.2.1/caches/transforms-1/files-1.1/firebase-messaging-license-11.4.2.aar/5ab8e884aa7daeba21b924d8595a72f9/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../gradle-4.2.1-bin/gradle-4.2.1/caches/transforms-1/files-1.1/firebase-messaging-license-11.4.2.aar/5ab8e884aa7daeba21b924d8595a72f9/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

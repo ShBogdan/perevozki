@@ -49,10 +49,10 @@ public class SmsListener extends BroadcastReceiver {
 
         }
 
-        if (SMS_RECEIVED.equals(intent.getAction()) || BOOT_COMPLETED.equals(intent.getAction())) {
-            Toast.makeText(context.getApplicationContext(), "Perevozki SMS получено", Toast.LENGTH_LONG).show();
-            MyLog.show("SMS ПОЛУЧИЛ");
-        }
+//        if (SMS_RECEIVED.equals(intent.getAction()) || BOOT_COMPLETED.equals(intent.getAction())) {
+//            Toast.makeText(context.getApplicationContext(), "Perevozki SMS получено", Toast.LENGTH_LONG).show();
+//            MyLog.show("SMS ПОЛУЧИЛ");
+//        }
     }
 
 }

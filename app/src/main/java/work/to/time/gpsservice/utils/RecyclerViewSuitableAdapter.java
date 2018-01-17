@@ -19,8 +19,6 @@ import work.to.time.gpsservice.BuildConfig;
 import work.to.time.gpsservice.R;
 import work.to.time.gpsservice.net.response.ActiveOrders;
 
-import static org.apache.commons.lang3.Validate.notNull;
-
 public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerViewSuitableAdapter.MyViewHolder> {
 
     private List<ActiveOrders.Order> orders;
@@ -88,7 +86,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
         holder.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/orders/view?id=" + order.getId() + "?suitable=" + currentRouteId));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "orders/view/" + order.getId() + "?suitable=" + currentRouteId));
                 view.getContext().startActivity(browserIntent);
             }
         });
