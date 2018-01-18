@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public final class SharedUtils {
     private static final String NAME = "perevozki";
     private static final String USER_LOGGED_IN = "userLoggedIn";
@@ -12,7 +16,7 @@ public final class SharedUtils {
     private static final String DEVICE_ID = "deviceId";
     private static final String UID = "uid";
     private static final String VERIFY = "verify";
-    private static final String FCM_MESSAGE = "fcmMessage";
+    private static final String FCM_MESSAGES = "fcmMessages";
 
 
     private static SharedPreferences getSharedPreferences(@NonNull Context context) {
@@ -76,12 +80,29 @@ public final class SharedUtils {
     }
 
     public static void setFcmMessage(@NonNull Context context, String value) {
-        save(context, FCM_MESSAGE, value);
+        SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
+        Set<String> existing = sp.getStringSet(FCM_MESSAGES, new HashSet<String>());
+        existing.add(value);
+        sp.edit()
+                .clear()
+                .putStringSet(FCM_MESSAGES, existing)
+                .apply();
+    }
+
+    public static void updateFcmMessage(@NonNull Context context, List<String> value) {
+        SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
+        sp.edit().remove(FCM_MESSAGES).apply();
+        Set<String> existing = new HashSet<String>(value);
+        sp.edit()
+                .clear()
+                .putStringSet(FCM_MESSAGES, existing)
+                .apply();
     }
 
     @Nullable
-    public static String getFcmMessage(@NonNull Context context) {
-        return getSharedPreferences(context).getString(FCM_MESSAGE, "emptyString");
+    public static Set<String> getFcmMessage(@NonNull Context context) {
+        SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
+        return sp.getStringSet(FCM_MESSAGES, new HashSet<String>());
     }
 
     public static void setUid(@NonNull Context context, int value) {

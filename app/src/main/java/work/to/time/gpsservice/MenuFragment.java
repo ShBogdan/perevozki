@@ -11,16 +11,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -33,6 +29,7 @@ import work.to.time.gpsservice.net.response.RouteModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
 import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.RecyclerViewAdapter;
+import work.to.time.gpsservice.utils.RecyclerViewMessagesAdapter;
 import work.to.time.gpsservice.utils.RecyclerViewSuitableAdapter;
 import work.to.time.gpsservice.utils.SharedUtils;
 
@@ -47,7 +44,6 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     RecyclerViewAdapter adapter;
     RecyclerViewSuitableAdapter suitableAdapter;
     Integer currentRouteId;
-
 
     private Integer actualRoutId;
 
@@ -144,8 +140,6 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
             }
 
             List<ActiveOrders.Order> orderList = orders.data;
-            MyLog.show(orderList.get(0).toString());
-
             suitableAdapter = new RecyclerViewSuitableAdapter(orderList, currentRouteId, orders.verified);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
             recyclerView.setLayoutManager(mLayoutManager);
@@ -186,6 +180,14 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
                 startActivity(browserIntent);
                 break;
         }
+    }
+
+    public void onClickActivity() {
+        RecyclerViewMessagesAdapter adapter = new RecyclerViewMessagesAdapter(mContext, SharedUtils.getFcmMessage(mContext));
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)

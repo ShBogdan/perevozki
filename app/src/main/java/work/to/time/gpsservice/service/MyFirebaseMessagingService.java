@@ -18,13 +18,13 @@ import java.util.Map;
 import work.to.time.gpsservice.LoginActivity;
 import work.to.time.gpsservice.R;
 import work.to.time.gpsservice.utils.Constants;
+import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.SharedUtils;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    private static final String TAG = "MyLog";
 
     {
-        Log.d(TAG, "MyFirebaseMessagingService");
+        MyLog.show(("MyFirebaseMessagingService"));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         if (remoteMessages.containsKey("startTracing")) {
-            if (Boolean.parseBoolean(remoteMessages.get("gpsTraced"))) {
+            if (Boolean.parseBoolean(remoteMessages.get("startTracing"))) {
                 Intent locationService = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 locationService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(locationService);
@@ -55,12 +55,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessages.containsKey("notification")) {
             sendNotification(remoteMessages.get("notification"));
         }
-        Log.d(TAG, "пишем");
 
         if (remoteMessages.containsKey("innerNotification")) {
-            Log.d(TAG, "пишем" + remoteMessages.get("innerNotification"));
-
             SharedUtils.setFcmMessage(this, remoteMessages.get("innerNotification"));
+            sendBroadcast(new Intent("MESSAGE_UPDATED"));
         }
 
     }
@@ -75,7 +73,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_wheel)
-                .setContentTitle("Perevozki Message")
+                .setContentTitle("Perevozki notification")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

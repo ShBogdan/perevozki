@@ -12,12 +12,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="work.to.time.gpsservice.LoginActivity">
 
-    <TextView
-        android:id="@+id/text_is_watching"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ведется слежение..."
-        android:textSize="12sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/text_is_watching"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Ведется слежение..."-->
+        <!--android:textSize="12sp" />-->
 
     <LinearLayout
         android:layout_width="match_parent"

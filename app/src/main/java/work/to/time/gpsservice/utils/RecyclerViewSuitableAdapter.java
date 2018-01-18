@@ -96,7 +96,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
             holder.requestPhone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (verified) {
+                    if (!verified) {
                         // FIXME: 016 16.01.18 ролистать в верх
                         Toast.makeText(view.getContext(), "Пройдите верификацию", Toast.LENGTH_SHORT).show();
                     } else {
@@ -110,7 +110,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
             holder.sender.setText("Телефон отправителя: " + order.getSenderPhone());
         }
 
-        if (!order.getCanCreateWaybill() && order.getCanCreateRequest()) {
+        if (order.getCanCreateRequest()) {
             holder.goToCreateWayBill.setVisibility(View.GONE);
         } else {
             holder.goToCreateWayBill.setOnClickListener(new View.OnClickListener() {

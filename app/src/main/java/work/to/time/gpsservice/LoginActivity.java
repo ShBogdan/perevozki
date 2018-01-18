@@ -2,6 +2,7 @@ package work.to.time.gpsservice;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -23,6 +24,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -43,6 +46,7 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,6 +54,8 @@ import work.to.time.gpsservice.service.GPSTracker;
 import work.to.time.gpsservice.utils.Constants;
 import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.PermissionsUtils;
+import work.to.time.gpsservice.utils.RecyclerViewAdapter;
+import work.to.time.gpsservice.utils.RecyclerViewMessagesAdapter;
 import work.to.time.gpsservice.utils.SharedUtils;
 
 public class LoginActivity extends FragmentActivity {
@@ -59,17 +65,36 @@ public class LoginActivity extends FragmentActivity {
     boolean doNotChangeSwitch = true;
     BroadcastReceiver receiver = null;
 
-    @Bind(R.id.text_is_watching)
-    TextView tvIsWatching;
+//    @Bind(R.id.text_is_watching)
+//    TextView tvIsWatching;
+
     @Bind(R.id.switchGPS)
     Switch mSwitchGPS;
-    //    @Bind(R.id.ic_notifications_1)
-//    ImageView ivNotify_1;
-
     @Bind(R.id.ic_notifications_2)
     ImageView ivNotify_2;
     @Bind(R.id.nr_notifications_2)
     TextView tvNotify_2;
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        String uri = "@drawable/ic_notifications";
+        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+        Drawable res = getResources().getDrawable(imageResource);
+        ivNotify_2.setImageDrawable(res);
+        final Set<String> notifications = SharedUtils.getFcmMessage(getApplicationContext());
+        if (notifications.size() != 0){
+            tvNotify_2.setText(String.valueOf(notifications.size()));
+            ivNotify_2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MenuFragment fragment = (MenuFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                    fragment.onClickActivity();
+                }
+            });
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +102,6 @@ public class LoginActivity extends FragmentActivity {
         MyLog.show("LoginActivity");
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-//        String uri = "@drawable/ic_notifications";
-//        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
-//        Drawable res = getResources().getDrawable(imageResource);
-//        ivNotify_1.setImageDrawable(res);
-//
-        String uri1 = "@drawable/ic_notifications";
-        int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
-        Drawable res1 = getResources().getDrawable(imageResource1);
-        ivNotify_2.setImageDrawable(res1);
-        if(!SharedUtils.getFcmMessage(getApplicationContext()).equals("emptyString")){
-            tvNotify_2.setText("1");
-            ivNotify_2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(), SharedUtils.getFcmMessage(getApplicationContext()), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -110,13 +115,6 @@ public class LoginActivity extends FragmentActivity {
             fragmentTransaction.add(R.id.fragment, menuFragment);
             fragmentTransaction.commit();
         }
-
-//        int PERMISSION_ALL = 1;
-//        String[] PERMISSIONS = {Manifest.permission.READ_SMS};
-//
-//        if(!hasPermissions(this, PERMISSIONS)){
-//            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-//        }
 
         switchListener();
     }
@@ -147,20 +145,20 @@ public class LoginActivity extends FragmentActivity {
     public void statusCheck() {
         doNotChangeSwitch = false;
 
-        if (isLocationByNet()) {
-            tvIsWatching.setText("Сервис для отслеживания: Сеть оператора");
-            tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
-        }
-        if (isGPSActive()) {
-            tvIsWatching.setText("Сервис для отслеживания: GPS");
-            tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
-        }
-
-
-        if (!isLocationByNet() && !isGPSActive()) {
-            tvIsWatching.setText("Нет доступных источников слежения");
-            tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
-        }
+//        if (isLocationByNet()) {
+//            tvIsWatching.setText("Сервис для отслеживания: Сеть оператора");
+//            tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
+//        }
+//        if (isGPSActive()) {
+//            tvIsWatching.setText("Сервис для отслеживания: GPS");
+//            tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
+//        }
+//
+//
+//        if (!isLocationByNet() && !isGPSActive()) {
+//            tvIsWatching.setText("Нет доступных источников слежения");
+//            tvIsWatching.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
+//        }
 
 
         if (isMyServiceRunning(GPSTracker.class)) {
@@ -380,11 +378,13 @@ public class LoginActivity extends FragmentActivity {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     statusCheck();
+                    tvNotify_2.setText(String.valueOf(SharedUtils.getFcmMessage(getApplicationContext()).size()));
                 }
             };
 
             IntentFilter filter = new IntentFilter();
             filter.addAction("SERVICE_DISABLED");
+            filter.addAction("MESSAGE_UPDATED");
             registerReceiver(receiver, filter);
         }
         if (!register) {
