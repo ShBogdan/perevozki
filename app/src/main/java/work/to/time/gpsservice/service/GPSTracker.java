@@ -8,9 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
-
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,7 +19,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
@@ -44,7 +43,7 @@ import work.to.time.gpsservice.utils.SharedUtils;
 public class GPSTracker extends Service implements NetSubscriber,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+        LocationListener {
     private static final String TAG = "MyLog";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
     private static final int FIVE_MINUTES = 1000 * 5 * 1; // высылаем на сервер каждые * минут
@@ -63,27 +62,28 @@ public class GPSTracker extends Service implements NetSubscriber,
     final Runnable runnable_proc = new Runnable() {
         public void run() {
             MyLog.show("tread work");
-            if(mGoogleApiClient.isConnected()) {
+            if (mGoogleApiClient.isConnected()) {
                 startLocationUpdates();
-                handleNewLocation();}
+                handleNewLocation();
+            }
 
-            if(!String.valueOf(getCurrentLongitude()).equals("0.0")){
-                manager.sendCoord(String.valueOf(getCurrentLongitude()), String.valueOf(getCurrentLatitude()), getTimeStamp(),SharedUtils.getAccessToken(getApplicationContext()));
+            if (!String.valueOf(getCurrentLongitude()).equals("0.0")) {
+                manager.sendCoord(String.valueOf(getCurrentLongitude()), String.valueOf(getCurrentLatitude()), getTimeStamp(), SharedUtils.getRouteId(getApplicationContext()), SharedUtils.getAccessToken(getApplicationContext()));
                 Toast.makeText(getBaseContext(), String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()), Toast.LENGTH_SHORT).show();
                 MyLog.show("Send to server: " + String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()));
             }
-            MyLog.show("current position: " + String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()));
+            MyLog.show("current position: " + String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()) +" routeId" +SharedUtils.getRouteId(getApplicationContext()));
 
             //Сохраненные данные. После отсылки удаляются в onNetSuccess
             SharedPreferences sp = getBaseContext().getSharedPreferences("position", Context.MODE_PRIVATE);
-            Map<String,?> arrPosition = sp.getAll();
-            for(Map.Entry<String,?> entry : arrPosition.entrySet()){
+            Map<String, ?> arrPosition = sp.getAll();
+            for (Map.Entry<String, ?> entry : arrPosition.entrySet()) {
                 String point[] = entry.getValue().toString().split("&");
                 String timeStamp = entry.getKey();
                 String longitude = point[0];
-                String latitude  = point[1];
-                String token     = point[2];
-                manager.sendCoord(longitude, latitude, timeStamp, token);
+                String latitude = point[1];
+                String token = point[2];
+                manager.sendCoord(longitude, latitude, timeStamp, SharedUtils.getRouteId(getApplicationContext()), token);
             }
             //
 
@@ -99,7 +99,7 @@ public class GPSTracker extends Service implements NetSubscriber,
     };
 
     public double getCurrentLatitude() {
-        return currentLatitude ;
+        return currentLatitude;
     }
 
     public double getCurrentLongitude() {
@@ -141,15 +141,15 @@ public class GPSTracker extends Service implements NetSubscriber,
                     .setSmallIcon(R.drawable.ic_wheel)
 //                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentIntent(pendingActivity)
-                    .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Остановить", pendingIntent)
+//                    .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Остановить", pendingIntent)
                     .setOngoing(true)
                     .setAutoCancel(false).build();
 //            notificationManager.notify(123, n);
-            startForeground(123,n);
+            startForeground(123, n);
 
 
         }
-        if(intent != null){
+        if (intent != null) {
             if (intent.getAction().equals(Constants.ACTION.STOPFOREGROUND_ACTION)) {
                 MyLog.show("STOPFOREGROUND_ACTION");
 
@@ -193,15 +193,15 @@ public class GPSTracker extends Service implements NetSubscriber,
     public void onNetError(int requestId, String error) {
         MyLog.show("onNetError");
 
-        MyLog.show("Сохранить: " +String.valueOf(getCurrentLongitude())+" "+String.valueOf(getCurrentLatitude())+" "+getTimeStamp()+" "+SharedUtils.getAccessToken(getApplicationContext()));
+        MyLog.show("Сохранить: " + String.valueOf(getCurrentLongitude()) + " " + String.valueOf(getCurrentLatitude()) + " " + getTimeStamp() + " " + SharedUtils.getAccessToken(getApplicationContext()));
 
         //Сохраняем не переданные
         SharedPreferences sp = getApplication().getSharedPreferences("position", Context.MODE_PRIVATE);
         sp.edit()
                 .putString(getTimeStamp(),
                         String.valueOf(getCurrentLongitude())
-                        +"&"+String.valueOf(getCurrentLatitude())
-                        +"&"+SharedUtils.getAccessToken(getApplicationContext()))
+                                + "&" + String.valueOf(getCurrentLatitude())
+                                + "&" + SharedUtils.getAccessToken(getApplicationContext()))
                 .apply();
         //
     }
@@ -223,7 +223,7 @@ public class GPSTracker extends Service implements NetSubscriber,
 
     private void handleNewLocation() {
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if(location!=null){
+        if (location != null) {
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
         }
@@ -238,13 +238,13 @@ public class GPSTracker extends Service implements NetSubscriber,
         return false;
     }
 
-    private void stopTracker(){
+    private void stopTracker() {
         handler_proc.removeCallbacksAndMessages(null);
 //        notificationManager.cancelAll();
         stopForeground(true);
         mGoogleApiClient.disconnect();
 //        stopLocationUpdates();
-        sendBroadcast(new Intent("SERVICE_DISABLED"));
+        sendBroadcast(new Intent("GPS_STATUS_UPDATED"));
     }
 
     @Nullable
@@ -271,8 +271,8 @@ public class GPSTracker extends Service implements NetSubscriber,
     private boolean checkPlayServices() {
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
         int result = googleAPI.isGooglePlayServicesAvailable(this);
-        if(result != ConnectionResult.SUCCESS) {
-            if(googleAPI.isUserResolvableError(result)) {
+        if (result != ConnectionResult.SUCCESS) {
+            if (googleAPI.isUserResolvableError(result)) {
                 googleAPI.getErrorDialog(null, result,
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
@@ -311,7 +311,7 @@ public class GPSTracker extends Service implements NetSubscriber,
     public void onLocationChanged(Location location) {
     }
 
-    private String getTimeStamp(){
+    private String getTimeStamp() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         df.setTimeZone(tz);

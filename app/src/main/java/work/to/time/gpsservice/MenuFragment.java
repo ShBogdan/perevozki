@@ -39,11 +39,11 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
 
     MyApplication app;
     Context mContext;
-    String fireBase;
-    String token;
+    String deviceId;
+    String accessToken;
     RecyclerViewAdapter adapter;
     RecyclerViewSuitableAdapter suitableAdapter;
-    Integer currentRouteId;
+    Integer currentRouteId = 0;
 
     private Integer actualRoutId;
 
@@ -80,42 +80,45 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
         mContext = getContext();
 
         app.getNetManager().subscribe(this);
-        fireBase = SharedUtils.getAccessDeviceId(mContext);
-        token = SharedUtils.getAccessToken(mContext);
+        deviceId = SharedUtils.getAccessDeviceId(mContext);
+        accessToken = SharedUtils.getAccessToken(mContext);
 
         active.setOnClickListener(this);
         suitable.setOnClickListener(this);
         verify.setOnClickListener(this);
-        MyLog.show(SharedUtils.getVerify(getContext()));
+
         if (allNotNull(SharedUtils.getVerify(getContext()))
                 && SharedUtils.getVerify(getContext()).equals("true")) {
             ((ViewGroup) verify.getParent()).removeView(verify);
             status.setText("Статус: Верифицирован");
         }
+
         role.setText("Роль: Водитель");
         showProgress(true);
-        app.getNetManager().activeRoutes(fireBase, token);
+        app.getNetManager().activeRoutes(deviceId, accessToken);
 
         return view;
     }
 
     @Override
     public void onNetSuccess(int requestId, Object data) {
+
         if (requestId == NetManager.REQUEST_ACTIVE_ROUTES) {
-            RouteModel rotes = (RouteModel) data;
-// FIXME: 017 17.01.18
-            if (rotes == null || rotes.data == null) {
-//                Toast.makeText(getContext(), "Проблемы с сервером", Toast.LENGTH_LONG).show();
+            if (data == null
+                    || ((RouteModel) data).data == null) {
+                Toast.makeText(mContext, "Проблемы с сервером", Toast.LENGTH_LONG).show();
                 showProgress(false);
                 return;
             }
 
+            RouteModel rotes = (RouteModel) data;
             List<RouteModel.Rotes> orderList = rotes.data;
             for (RouteModel.Rotes r : orderList) {
                 if (allNotNull(r.getCurrent())
                         && r.getCurrent()) {
                     MyLog.show(r.toString());
                     currentRouteId = r.getId();
+                    SharedUtils.setRouteId(mContext, currentRouteId.toString());
 
                     actualRout.setText(String.format("Маршрут: %s - %s", r.getFromCity(), r.getToCity()));
                     actualRoutId = r.getId();
@@ -130,25 +133,34 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
                 }
             }
         }
-        if (requestId == NetManager.REQUEST_SUITABLE_ROUTES) {
-            ActiveOrders orders = (ActiveOrders) data;
-// FIXME: 017 17.01.18
-            if (orders == null || orders.data == null) {
-//                Toast.makeText(getContext(), "Проблемы с сервером", Toast.LENGTH_LONG).show();
+
+        // TODO: 024 24.01.18
+        try {
+            if (((LoginActivity) getActivity()).NEW_MESSAGE) {
+                onClickActivity();
+                ((LoginActivity) getActivity()).NEW_MESSAGE = false;
                 showProgress(false);
                 return;
             }
+        } catch (Exception e) {
+        }
 
+        if (requestId == NetManager.REQUEST_SUITABLE_ROUTES) {
+            if (data == null
+                    || ((ActiveOrders) data).data == null) {
+                Toast.makeText(mContext, "Проблемы с сервером", Toast.LENGTH_LONG).show();
+                showProgress(false);
+                return;
+            }
+            ActiveOrders orders = (ActiveOrders) data;
             List<ActiveOrders.Order> orderList = orders.data;
             suitableAdapter = new RecyclerViewSuitableAdapter(orderList, currentRouteId, orders.verified);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(suitableAdapter);
             suitableAdapter.notifyDataSetChanged();
-
         }
         showProgress(false);
-
     }
 
     @Override
@@ -167,13 +179,18 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.active:
+                recyclerView.setAdapter(null);
                 showProgress(true);
-                app.getNetManager().activeRoutes(fireBase, token);
+                app.getNetManager().activeRoutes(deviceId, accessToken);
                 break;
             case R.id.suitable:
+                recyclerView.setAdapter(null);
                 showProgress(true);
-                if (actualRoutId != null)
-                    app.getNetManager().suitableRoutes(actualRoutId.toString(), token);
+                if (actualRoutId != null) {
+                    app.getNetManager().suitableRoutes(actualRoutId.toString(), accessToken);
+                } else {
+                    showProgress(false);
+                }
                 break;
             case R.id.verify:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.REGISTRATION_URL));
@@ -183,7 +200,7 @@ public class MenuFragment extends Fragment implements NetSubscriber, View.OnClic
     }
 
     public void onClickActivity() {
-        RecyclerViewMessagesAdapter adapter = new RecyclerViewMessagesAdapter(mContext, SharedUtils.getFcmMessage(mContext));
+        RecyclerViewMessagesAdapter adapter = new RecyclerViewMessagesAdapter(mContext, SharedUtils.getFcmMessages(mContext));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

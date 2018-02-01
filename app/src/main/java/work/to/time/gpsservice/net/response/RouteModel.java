@@ -14,7 +14,7 @@ public class RouteModel extends BaseResponse implements Serializable {
     }
 
     public class Rotes {
-        Integer id;
+        Integer id = 0;
         List<ActiveOrders.Order> orders;
         String status;
         String statusName;

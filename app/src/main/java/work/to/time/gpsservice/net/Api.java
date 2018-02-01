@@ -32,6 +32,7 @@ public interface Api {
     Call<CoordModel> sendCoord(@Field("longitude") String longitude,
                                @Field("latitude") String latitude,
                                @Field("timestamp") String timestamp,
+                               @Field("routeId") String routeId,
                                @Header("auth") String header);
 
     @FormUrlEncoded
@@ -59,7 +60,9 @@ public interface Api {
     @FormUrlEncoded
     @POST("/api/routes/active")
     Call<RouteModel> activeRoutes(@Field("deviceId") String deviceId,
-                                  @Header("auth") String header);
+                                  @Header("auth") String header,
+                                  @Header("Language") String language
+    );
 
     @FormUrlEncoded
     @POST("/api/routes/archive")

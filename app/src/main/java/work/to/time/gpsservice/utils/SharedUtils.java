@@ -5,14 +5,21 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import work.to.time.gpsservice.net.response.MessageModel;
 
 public final class SharedUtils {
     private static final String NAME = "perevozki";
     private static final String USER_LOGGED_IN = "userLoggedIn";
     private static final String ACCESS_TOKEN = "accessToken";
+    private static final String ROUTE_ID = "routeId";
     private static final String DEVICE_ID = "deviceId";
     private static final String UID = "uid";
     private static final String VERIFY = "verify";
@@ -56,6 +63,15 @@ public final class SharedUtils {
         save(context, ACCESS_TOKEN, value);
     }
 
+    public static void setRouteId(@NonNull Context context, String value) {
+        save(context, ROUTE_ID, value);
+    }
+
+    public static String getRouteId(@NonNull Context context) {
+        return getSharedPreferences(context).getString(ROUTE_ID, "0");
+    }
+
+
     public static void setVerify(@NonNull Context context, String value) {
         save(context, VERIFY, value);
     }
@@ -72,14 +88,14 @@ public final class SharedUtils {
 
     @Nullable
     public static String getVerify(@NonNull Context context) {
-        return getSharedPreferences(context).getString(VERIFY, null);
+        return getSharedPreferences(context).getString(VERIFY, "false");
     }
 
     public static void setAccessDeviceId(@NonNull Context context, String value) {
         save(context, DEVICE_ID, value);
     }
 
-    public static void setFcmMessage(@NonNull Context context, String value) {
+    public static void setFcmMessages(@NonNull Context context, String value) {
         SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
         Set<String> existing = sp.getStringSet(FCM_MESSAGES, new HashSet<String>());
         existing.add(value);
@@ -89,7 +105,7 @@ public final class SharedUtils {
                 .apply();
     }
 
-    public static void updateFcmMessage(@NonNull Context context, List<String> value) {
+    public static void updateFcmMessages(@NonNull Context context, List<String> value) {
         SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
         sp.edit().remove(FCM_MESSAGES).apply();
         Set<String> existing = new HashSet<String>(value);
@@ -99,10 +115,14 @@ public final class SharedUtils {
                 .apply();
     }
 
-    @Nullable
-    public static Set<String> getFcmMessage(@NonNull Context context) {
+    public static Set<String> getFcmMessages(@NonNull Context context) {
         SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
         return sp.getStringSet(FCM_MESSAGES, new HashSet<String>());
+    }
+
+    public static void removeFcmMessages(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("MESSAGES", Context.MODE_PRIVATE);
+        sp.edit().remove(FCM_MESSAGES).apply();
     }
 
     public static void setUid(@NonNull Context context, int value) {
@@ -118,7 +138,7 @@ public final class SharedUtils {
         getSharedPreferences(context).edit().clear().commit();
     }
 
-    public static void removeRecord(Context context) {
+    public static void removeAccessToken(Context context) {
         getSharedPreferences(context).edit().remove(ACCESS_TOKEN).commit();
     }
 

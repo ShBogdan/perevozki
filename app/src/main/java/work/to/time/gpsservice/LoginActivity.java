@@ -2,7 +2,6 @@ package work.to.time.gpsservice;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,8 +23,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -54,19 +51,15 @@ import work.to.time.gpsservice.service.GPSTracker;
 import work.to.time.gpsservice.utils.Constants;
 import work.to.time.gpsservice.utils.MyLog;
 import work.to.time.gpsservice.utils.PermissionsUtils;
-import work.to.time.gpsservice.utils.RecyclerViewAdapter;
-import work.to.time.gpsservice.utils.RecyclerViewMessagesAdapter;
 import work.to.time.gpsservice.utils.SharedUtils;
 
 public class LoginActivity extends FragmentActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    boolean doNotChangeSwitch = true;
-    BroadcastReceiver receiver = null;
-
-//    @Bind(R.id.text_is_watching)
-//    TextView tvIsWatching;
+    private boolean doNotChangeSwitch = true;
+    private BroadcastReceiver receiver = null;
+    public boolean NEW_MESSAGE = false;
 
     @Bind(R.id.switchGPS)
     Switch mSwitchGPS;
@@ -82,17 +75,17 @@ public class LoginActivity extends FragmentActivity {
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable res = getResources().getDrawable(imageResource);
         ivNotify_2.setImageDrawable(res);
-        final Set<String> notifications = SharedUtils.getFcmMessage(getApplicationContext());
-        if (notifications.size() != 0){
-            tvNotify_2.setText(String.valueOf(notifications.size()));
-            ivNotify_2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+
+        tvNotify_2.setText(String.valueOf(SharedUtils.getFcmMessages(getApplicationContext()).size()));
+        ivNotify_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment) instanceof MenuFragment) {
                     MenuFragment fragment = (MenuFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
                     fragment.onClickActivity();
                 }
-            });
-        }
+            }
+        });
 
     }
 
@@ -117,6 +110,12 @@ public class LoginActivity extends FragmentActivity {
         }
 
         switchListener();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null
+                && getIntent().getExtras().getBoolean("GET_NEW_MESSAGE")) {
+            NEW_MESSAGE = true;
+        }
     }
 
     @Override
@@ -124,7 +123,7 @@ public class LoginActivity extends FragmentActivity {
         MyLog.show("onResume");
         super.onResume();
         broadcastReceiver(true);
-        statusCheck();
+        changeGpsSwitchView();
     }
 
     @Override
@@ -142,7 +141,7 @@ public class LoginActivity extends FragmentActivity {
         //stopService(new Intent(getApplicationContext(), GPSTracker.class));
     }
 
-    public void statusCheck() {
+    public void changeGpsSwitchView() {
         doNotChangeSwitch = false;
 
 //        if (isLocationByNet()) {
@@ -362,7 +361,8 @@ public class LoginActivity extends FragmentActivity {
                 .setNegativeButton("Да", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedUtils.removeRecord(getApplicationContext());
+                        SharedUtils.removeAccessToken(getApplicationContext());
+                        SharedUtils.removeFcmMessages(getApplicationContext());
                         if (isMyServiceRunning(GPSTracker.class)) {
                             stopService();
                         }
@@ -377,13 +377,13 @@ public class LoginActivity extends FragmentActivity {
             receiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    statusCheck();
-                    tvNotify_2.setText(String.valueOf(SharedUtils.getFcmMessage(getApplicationContext()).size()));
+                    changeGpsSwitchView();
+                    tvNotify_2.setText(String.valueOf(SharedUtils.getFcmMessages(getApplicationContext()).size()));
                 }
             };
 
             IntentFilter filter = new IntentFilter();
-            filter.addAction("SERVICE_DISABLED");
+            filter.addAction("GPS_STATUS_UPDATED");
             filter.addAction("MESSAGE_UPDATED");
             registerReceiver(receiver, filter);
         }

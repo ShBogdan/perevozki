@@ -8,7 +8,7 @@ public interface Net extends Publisher<NetSubscriber> {
 
     void authorize(String username, String password, String deviceId);
 
-    void sendCoord(String longitude, String latitude, String timestamp, String header);
+    void sendCoord(String longitude, String latitude, String timestamp, String routeId, String header);
 
     void activeOrders(String deviceId, String token);
 

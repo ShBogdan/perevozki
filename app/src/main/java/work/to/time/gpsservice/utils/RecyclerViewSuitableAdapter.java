@@ -86,7 +86,7 @@ public class RecyclerViewSuitableAdapter extends RecyclerView.Adapter<RecyclerVi
         holder.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "orders/view/" + order.getId() + "?suitable=" + currentRouteId));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BASE_URL + "/orders/view/" + order.getId() + "?suitable=" + currentRouteId));
                 view.getContext().startActivity(browserIntent);
             }
         });

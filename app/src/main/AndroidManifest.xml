@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- For receiver BOOT_COMPLETED -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
@@ -21,6 +20,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".core.MyApplication"
@@ -38,12 +39,18 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:theme="@android:style/Theme.Dialog"
+            android:name=".MessageActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" />
 
         <receiver android:name=".service.OnBootReceiver">
             <intent-filter android:priority="500">
@@ -60,7 +67,7 @@
             <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                </intent-filter>
+            </intent-filter>
         </receiver>
 
         <service
@@ -83,3 +90,5 @@
     </application>
 
 </manifest>
+
+    <!--android:theme="@android:style/Theme.Holo.Light.Dialog"-->

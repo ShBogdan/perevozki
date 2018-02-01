@@ -21,6 +21,7 @@ import work.to.time.gpsservice.net.response.CoordModel;
 import work.to.time.gpsservice.net.response.RouteModel;
 import work.to.time.gpsservice.observer.net.NetSubscriber;
 import work.to.time.gpsservice.utils.MyLog;
+import work.to.time.gpsservice.utils.SharedUtils;
 
 
 public class NetManager implements Net {
@@ -63,8 +64,8 @@ public class NetManager implements Net {
     }
 
     @Override
-    public void sendCoord(String longitude, String latitude, String timestamp, String token) {
-        api.sendCoord(longitude, latitude, timestamp, "Bearer " + token).enqueue(new Callback<CoordModel>() {
+    public void sendCoord(String longitude, String latitude, String timestamp, String routeId, String token) {
+        api.sendCoord(longitude, latitude, timestamp, routeId,"Bearer " + token).enqueue(new Callback<CoordModel>() {
             @Override
             public void onResponse(Call<CoordModel> call, Response<CoordModel> response) {
                 MyLog.show("response.body()" + response.body().toString());
@@ -108,7 +109,7 @@ public class NetManager implements Net {
 
     @Override
     public void activeRoutes(String deviceId, String token) {
-        api.activeRoutes(deviceId, "Bearer " + token).enqueue(new Callback<RouteModel>() {
+        api.activeRoutes(deviceId, "Bearer " + token, "en").enqueue(new Callback<RouteModel>() {
             @Override
             public void onResponse(Call<RouteModel> call, Response<RouteModel> response) {
                 notifySuccess(REQUEST_ACTIVE_ROUTES, response.body());
